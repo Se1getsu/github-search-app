@@ -9,12 +9,10 @@
 import UIKit
 
 class ViewController2: UIViewController {
+    // MARK: UI
     @IBOutlet weak var ImgView: UIImageView!
-    
     @IBOutlet weak var TtlLbl: UILabel!
-    
     @IBOutlet weak var LangLbl: UILabel!
-    
     @IBOutlet weak var StrsLbl: UILabel!
     @IBOutlet weak var WchsLbl: UILabel!
     @IBOutlet weak var FrksLbl: UILabel!
@@ -25,29 +23,22 @@ class ViewController2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let repo = vc1.repo[vc1.idx]
-        
-        LangLbl.text = "Written in \(repo["language"] as? String ?? "")"
-        StrsLbl.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
-        WchsLbl.text = "\(repo["wachers_count"] as? Int ?? 0) watchers"
-        FrksLbl.text = "\(repo["forks_count"] as? Int ?? 0) forks"
-        IsssLbl.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
+        LangLbl.text = "Written in [language]"
+        StrsLbl.text = "[stargazers_count] stars"
+        WchsLbl.text = "[wachers_count] watchers"
+        FrksLbl.text = "[forks_count] forks"
+        IsssLbl.text = "[open_issues_count] open issues"
         getImage()
     }
     
     func getImage() {
-        let repo = vc1.repo[vc1.idx]
-        
-        TtlLbl.text = repo["full_name"] as? String
-        
-        if let owner = repo["owner"] as? [String: Any] {
-            if let imgURL = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imgURL)!) { data, _, _ in
-                    let img = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        self.ImgView.image = img
-                    }
-                }.resume()
+        TtlLbl.text = "[full_name]"
+        Task {
+            // TODO: 所有者の画像のURLを指定
+            let url = URL(string: "https://avatars.githubusercontent.com/u/10639145?v=4")!
+            let image = try await ImageFetcher().fetchImage(from: url)
+            await MainActor.run {
+                ImgView.image = image
             }
         }
     }

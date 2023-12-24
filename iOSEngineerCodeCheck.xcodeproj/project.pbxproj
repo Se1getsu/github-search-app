@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A697651E2B37C674001B8136 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A697651D2B37C674001B8136 /* Alamofire */; };
+		A69765212B37C6C2001B8136 /* GitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69765202B37C6C2001B8136 /* GitRepository.swift */; };
+		A69765232B37D094001B8136 /* GitRepositorySearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69765222B37D094001B8136 /* GitRepositorySearcher.swift */; };
+		A69765252B37D545001B8136 /* GitRepositoryOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69765242B37D545001B8136 /* GitRepositoryOwner.swift */; };
+		A697652A2B37EFF3001B8136 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69765292B37EFF3001B8136 /* ImageFetcher.swift */; };
 		BF0A658D244F2A3B00280FA6 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* ViewController2.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -36,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A69765202B37C6C2001B8136 /* GitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepository.swift; sourceTree = "<group>"; };
+		A69765222B37D094001B8136 /* GitRepositorySearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositorySearcher.swift; sourceTree = "<group>"; };
+		A69765242B37D545001B8136 /* GitRepositoryOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryOwner.swift; sourceTree = "<group>"; };
+		A69765292B37EFF3001B8136 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A697651E2B37C674001B8136 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +88,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A697651F2B37C6B6001B8136 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A69765262B37D957001B8136 /* Entity */,
+				A69765272B37D9CA001B8136 /* Service */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A69765262B37D957001B8136 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				A69765202B37C6C2001B8136 /* GitRepository.swift */,
+				A69765242B37D545001B8136 /* GitRepositoryOwner.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		A69765272B37D9CA001B8136 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				A69765222B37D094001B8136 /* GitRepositorySearcher.swift */,
+				A69765292B37EFF3001B8136 /* ImageFetcher.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		BFD945D2244DC5E80012785A = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +138,7 @@
 		BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				A697651F2B37C6B6001B8136 /* Model */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
 				BFD945E2244DC5E80012785A /* ViewController.swift */,
@@ -148,6 +186,9 @@
 				A695B62B2B37B7930059B78D /* PBXTargetDependency */,
 			);
 			name = iOSEngineerCodeCheck;
+			packageProductDependencies = (
+				A697651D2B37C674001B8136 /* Alamofire */,
+			);
 			productName = iOSEngineerCodeCheck;
 			productReference = BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +264,7 @@
 			mainGroup = BFD945D2244DC5E80012785A;
 			packageReferences = (
 				A695B6292B37B6E10059B78D /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				A697651C2B37C674001B8136 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = BFD945DC244DC5E80012785A /* Products */;
 			projectDirPath = "";
@@ -268,9 +310,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD945E3244DC5E80012785A /* ViewController.swift in Sources */,
+				A69765212B37C6C2001B8136 /* GitRepository.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* ViewController2.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
+				A69765252B37D545001B8136 /* GitRepositoryOwner.swift in Sources */,
+				A69765232B37D094001B8136 /* GitRepositorySearcher.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
+				A697652A2B37EFF3001B8136 /* ImageFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +661,14 @@
 				minimumVersion = 0.54.0;
 			};
 		};
+		A697651C2B37C674001B8136 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire?tab=readme-ov-file#installation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -622,6 +676,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A695B6292B37B6E10059B78D /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintPlugin";
+		};
+		A697651D2B37C674001B8136 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A697651C2B37C674001B8136 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
