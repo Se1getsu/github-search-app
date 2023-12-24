@@ -33,6 +33,13 @@ class ViewController2: UIViewController {
     
     func getImage() {
         TtlLbl.text = "[full_name]"
-        // TODO: 所有者の画像をフェッチしてImgViewに表示
+        Task {
+            // TODO: 所有者の画像のURLを指定
+            let url = URL(string: "https://avatars.githubusercontent.com/u/10639145?v=4")!
+            let image = try await ImageFetcher().fetchImage(from: url)
+            await MainActor.run {
+                ImgView.image = image
+            }
+        }
     }
 }
