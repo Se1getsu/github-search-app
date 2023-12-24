@@ -10,6 +10,7 @@
 		A6519E922B382FC100335D24 /* GitRepositoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6519E912B382FC100335D24 /* GitRepositoryListPresenter.swift */; };
 		A6519E942B38300700335D24 /* GitRepositoryListPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6519E932B38300700335D24 /* GitRepositoryListPresenterInput.swift */; };
 		A6519E962B38300F00335D24 /* GitRepositoryListPresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6519E952B38300F00335D24 /* GitRepositoryListPresenterOutput.swift */; };
+		A6519E9B2B38526800335D24 /* GitRepositoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6519E9A2B38526800335D24 /* GitRepositoryDetailView.swift */; };
 		A697651E2B37C674001B8136 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A697651D2B37C674001B8136 /* Alamofire */; };
 		A69765212B37C6C2001B8136 /* GitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69765202B37C6C2001B8136 /* GitRepository.swift */; };
 		A69765232B37D094001B8136 /* GitRepositorySearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69765222B37D094001B8136 /* GitRepositorySearcher.swift */; };
@@ -46,6 +47,7 @@
 		A6519E912B382FC100335D24 /* GitRepositoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryListPresenter.swift; sourceTree = "<group>"; };
 		A6519E932B38300700335D24 /* GitRepositoryListPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryListPresenterInput.swift; sourceTree = "<group>"; };
 		A6519E952B38300F00335D24 /* GitRepositoryListPresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryListPresenterOutput.swift; sourceTree = "<group>"; };
+		A6519E9A2B38526800335D24 /* GitRepositoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryDetailView.swift; sourceTree = "<group>"; };
 		A69765202B37C6C2001B8136 /* GitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepository.swift; sourceTree = "<group>"; };
 		A69765222B37D094001B8136 /* GitRepositorySearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositorySearcher.swift; sourceTree = "<group>"; };
 		A69765242B37D545001B8136 /* GitRepositoryOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryOwner.swift; sourceTree = "<group>"; };
@@ -103,6 +105,15 @@
 			path = GitRepositoryListView;
 			sourceTree = "<group>";
 		};
+		A6519E972B38516600335D24 /* GitRepositoryDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				BF0A658C244F2A3B00280FA6 /* GitRepositoryDetailViewController.swift */,
+				A6519E9A2B38526800335D24 /* GitRepositoryDetailView.swift */,
+			);
+			path = GitRepositoryDetailView;
+			sourceTree = "<group>";
+		};
 		A697651F2B37C6B6001B8136 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,9 +166,9 @@
 			children = (
 				A697651F2B37C6B6001B8136 /* Model */,
 				A6519E902B382E3800335D24 /* GitRepositoryListView */,
+				A6519E972B38516600335D24 /* GitRepositoryDetailView */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
-				BF0A658C244F2A3B00280FA6 /* GitRepositoryDetailViewController.swift */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
@@ -324,6 +335,7 @@
 			files = (
 				BFD945E3244DC5E80012785A /* GitRepositoryListViewController.swift in Sources */,
 				A69765212B37C6C2001B8136 /* GitRepository.swift in Sources */,
+				A6519E9B2B38526800335D24 /* GitRepositoryDetailView.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* GitRepositoryDetailViewController.swift in Sources */,
 				A6519E922B382FC100335D24 /* GitRepositoryListPresenter.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,

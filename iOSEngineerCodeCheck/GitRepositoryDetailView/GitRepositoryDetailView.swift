@@ -1,16 +1,16 @@
 //
-//  GitRepositoryDetailViewController.swift
+//  GitRepositoryDetailView.swift
 //  iOSEngineerCodeCheck
-//
-//  Created by 史 翔新 on 2020/04/21.
-//  Copyright © 2020 YUMEMI Inc. All rights reserved.
+//  
+//  Created by Seigetsu on 2023/12/24
+//  Copyright © 2023 YUMEMI Inc. All rights reserved.
 //
 
 import UIKit
 
-class GitRepositoryDetailViewController: UIViewController {
+final class GitRepositoryDetailView: UIView {
     // MARK: UI
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -25,7 +25,7 @@ class GitRepositoryDetailViewController: UIViewController {
         return stackView
     }()
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.textAlignment = .center
@@ -33,57 +33,57 @@ class GitRepositoryDetailViewController: UIViewController {
         return label
     }()
     
-    private let languageLabel: UILabel = {
+    let languageLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }()
     
-    private let starsLabel: UILabel = {
+    let starsLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }()
     
-    private let watchesLabel: UILabel = {
+    let watchesLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }()
     
-    private let forksLabel: UILabel = {
+    let forksLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }()
     
-    private let issuesLabel: UILabel = {
+    let issuesLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }()
+    
+    // MARK: メソッド
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
         
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "[full_name]"
-        view.backgroundColor = .white
-        
-        view.addSubview(imageView)
-        view.addSubview(titleLabel)
-        view.addSubview(languageLabel)
-        view.addSubview(stackView)
+        addSubview(imageView)
+        addSubview(titleLabel)
+        addSubview(languageLabel)
+        addSubview(stackView)
         stackView.addArrangedSubview(starsLabel)
         stackView.addArrangedSubview(watchesLabel)
         stackView.addArrangedSubview(forksLabel)
         stackView.addArrangedSubview(issuesLabel)
         
         // TODO: 横画面にすると画像が大きくなりすぎる。
-        let safeArea = view.safeAreaLayoutGuide
+        let safeArea = safeAreaLayoutGuide
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
@@ -111,24 +111,9 @@ class GitRepositoryDetailViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: languageLabel.trailingAnchor),
             stackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20)
         ])
-        
-        languageLabel.text = "Written in [language]"
-        starsLabel.text = "[stargazers_count] stars"
-        watchesLabel.text = "[wachers_count] watchers"
-        forksLabel.text = "[forks_count] forks"
-        issuesLabel.text = "[open_issues_count] open issues"
-        getImage()
     }
     
-    func getImage() {
-        titleLabel.text = "[full_name]"
-        Task {
-            // TODO: 所有者の画像のURLを指定
-            let url = URL(string: "https://avatars.githubusercontent.com/u/10639145?v=4")!
-            let image = try await ImageFetcher().fetchImage(from: url)
-            await MainActor.run {
-                imageView.image = image
-            }
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
