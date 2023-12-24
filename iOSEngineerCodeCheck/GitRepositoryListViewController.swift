@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GitRepositoryListViewController.swift
 //  iOSEngineerCodeCheck
 //
 //  Created by 史 翔新 on 2020/04/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GitRepositoryListViewController: UIViewController {
     // MARK: UI
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension GitRepositoryListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gitRepositories.count
     }
@@ -75,15 +75,15 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension GitRepositoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = ViewController2()
+        let vc = GitRepositoryDetailViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension ViewController: UISearchBarDelegate {
+extension GitRepositoryListViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.text = ""
         return true

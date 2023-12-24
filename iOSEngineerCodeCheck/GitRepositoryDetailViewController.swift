@@ -1,5 +1,5 @@
 //
-//  ViewController2.swift
+//  GitRepositoryDetailViewController.swift
 //  iOSEngineerCodeCheck
 //
 //  Created by 史 翔新 on 2020/04/21.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController2: UIViewController {
+class GitRepositoryDetailViewController: UIViewController {
     // MARK: UI
     private let imageView: UIImageView = {
         let imageView = UIImageView()
