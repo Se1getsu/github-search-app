@@ -15,6 +15,7 @@ final class GitRepositoryListPresenter {
     // MARK: 状態
     private(set) var gitRepositories: [GitRepository] = []
     private let gitRepositorySearcher = GitRepositorySearcher()
+    private(set) var searchingTask: Task<(), Never>?
     
     // MARK: メソッド
     init(view: GitRepositoryListPresenterOutput) {
@@ -24,20 +25,26 @@ final class GitRepositoryListPresenter {
 
 extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
     func searchBar(textDidChange searchText: String) {
-        // TODO: 検索キャンセル
+        searchingTask?.cancel()
     }
     
     func searchBarSearchButtonClicked(searchText: String) {
         guard !searchText.isEmpty else { return }
-        Task {
+        searchingTask = Task {
             do {
-                gitRepositories = try await gitRepositorySearcher.search(query: searchText).items
+                let gitRepositories = try await gitRepositorySearcher.search(query: searchText).items
                 await MainActor.run {
+                    self.gitRepositories = gitRepositories
                     view.reloadGitRepositories()
                 }
             } catch {
-                // TODO: エラーハンドリング
-                print(error)
+                if Task.isCancelled {
+                    // TODO: タスクがキャンセルされた時の処理
+                    
+                } else {
+                    // TODO: エラーハンドリング
+                    print(error)
+                }
             }
         }
     }
