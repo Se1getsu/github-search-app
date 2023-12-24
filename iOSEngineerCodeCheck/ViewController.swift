@@ -78,7 +78,8 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: 画面遷移
+        let vc = ViewController2()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
