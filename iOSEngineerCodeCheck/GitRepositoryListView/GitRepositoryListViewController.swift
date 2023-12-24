@@ -71,7 +71,7 @@ extension GitRepositoryListViewController: UITableViewDataSource {
         
         var content = cell.defaultContentConfiguration()
         content.text = gitRepository.fullName
-        content.secondaryText = gitRepository.language
+        content.secondaryText = gitRepository.language ?? "言語なし"
         cell.contentConfiguration = content
         return cell
     }
