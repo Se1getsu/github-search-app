@@ -24,10 +24,12 @@ class GitRepositoryListViewController: UIViewController {
     }()
     
     // MARK: 依存
-    private let gitRepositorySearcher = GitRepositorySearcher()
+    private var presenter: GitRepositoryListPresenterInput!
     
-    // MARK: 状態
-    private var gitRepositories: [GitRepository] = []
+    // MARK: メソッド
+    func inject(presenter: GitRepositoryListPresenterInput) {
+        self.presenter = presenter
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,12 +62,12 @@ class GitRepositoryListViewController: UIViewController {
 
 extension GitRepositoryListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return gitRepositories.count
+        return presenter.gitRepositories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let gitRepository = gitRepositories[indexPath.row]
+        let gitRepository = presenter.gitRepositories[indexPath.row]
         
         var content = cell.defaultContentConfiguration()
         content.text = gitRepository.fullName
@@ -90,21 +92,17 @@ extension GitRepositoryListViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // TODO: 検索キャンセル
+        presenter.searchBar(textDidChange: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text, !query.isEmpty else { return }
-        Task {
-            do {
-                self.gitRepositories = try await gitRepositorySearcher.search(query: query).items
-                await MainActor.run {
-                    self.tableView.reloadData()
-                }
-            } catch {
-                // TODO: エラーハンドリング
-                print(error)
-            }
-        }
+        guard let searchText = searchBar.text else { return }
+        presenter.searchBarSearchButtonClicked(searchText: searchText)
+    }
+}
+
+extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
+    func reloadGitRepositories() {
+        tableView.reloadData()
     }
 }

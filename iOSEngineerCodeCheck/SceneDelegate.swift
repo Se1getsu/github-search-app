@@ -15,8 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let vc = GitRepositoryListViewController()
-        window?.rootViewController = UINavigationController(rootViewController: vc)
+        let rootVC = GitRepositoryListViewController()
+        let presenter = GitRepositoryListPresenter(view: rootVC)
+        rootVC.inject(presenter: presenter)
+        window?.rootViewController = UINavigationController(rootViewController: rootVC)
         window?.makeKeyAndVisible()
     }
 
