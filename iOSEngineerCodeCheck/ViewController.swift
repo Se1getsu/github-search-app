@@ -8,26 +8,82 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UISearchBarDelegate {
+class ViewController: UIViewController {
     // MARK: UI
-    @IBOutlet weak var SchBr: UISearchBar!
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "GitHubのリポジトリを検索"
+        searchBar.showsCancelButton = true
+        return searchBar
+    }()
+    
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return tableView
+    }()
     
     // MARK: 依存
     private let gitRepositorySearcher = GitRepositorySearcher()
     
     // MARK: 状態
     private var gitRepositories: [GitRepository] = []
-    var idx: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        SchBr.text = "GitHubのリポジトリを検索できるよー"
-        SchBr.delegate = self
+        title = "リポジトリ検索"
+        view.backgroundColor = .white
+        
+        view.addSubview(searchBar)
+        view.addSubview(tableView)
+        
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        searchBar.delegate = self
+    }
+}
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return gitRepositories.count
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let gitRepository = gitRepositories[indexPath.row]
+        
+        var content = cell.defaultContentConfiguration()
+        content.text = gitRepository.fullName
+        content.secondaryText = gitRepository.language
+        cell.contentConfiguration = content
+        return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        // TODO: 画面遷移
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        // ↓こうすれば初期のテキストを消せる
         searchBar.text = ""
         return true
     }
@@ -49,31 +105,5 @@ class ViewController: UITableViewController, UISearchBarDelegate {
                 print(error)
             }
         }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail"{
-            let dtl = segue.destination as! ViewController2
-            dtl.vc1 = self
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return gitRepositories.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let gitRepository = gitRepositories[indexPath.row]
-        cell.textLabel?.text = gitRepository.fullName
-        cell.detailTextLabel?.text = gitRepository.language
-        cell.tag = indexPath.row
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 画面遷移時に呼ばれる
-        idx = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
     }
 }
