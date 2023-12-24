@@ -30,7 +30,13 @@ class GitRepositoryDetailViewController: UIViewController {
         title = gitRepository.fullName
         view = myView
         
-        myView.languageLabel.text = "Written in \(gitRepository.language)"
+        myView.languageLabel.text = {
+            if let language = gitRepository.language {
+                "Written in \(language)"
+            } else {
+                "No Language"
+            }
+        }()
         myView.starsLabel.text = "\(gitRepository.stargazersCount) stars"
         myView.watchesLabel.text = "\(gitRepository.watchersCount) watchers"
         myView.forksLabel.text = "\(gitRepository.forksCount) forks"
@@ -40,7 +46,7 @@ class GitRepositoryDetailViewController: UIViewController {
     
     func getImage() {
         myView.titleLabel.text = gitRepository.fullName
-        guard let url = URL(string: gitRepository.owner.avatarURL) else { return }
+        guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else { return }
         Task {
             let image = try await ImageFetcher().fetchImage(from: url)
             await MainActor.run {

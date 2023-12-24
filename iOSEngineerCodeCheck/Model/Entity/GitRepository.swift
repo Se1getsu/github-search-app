@@ -19,10 +19,10 @@ struct GitRepository: Decodable {
     let htmlURL: String
     
     /// リポジトリの所有者。
-    let owner: GitRepositoryOwner
+    let owner: GitRepositoryOwner?
     
     /// プロジェクト言語。
-    let language: String
+    let language: String?
     
     /// Star 数。
     let stargazersCount: Int
