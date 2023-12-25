@@ -117,3 +117,24 @@ final class GitRepositoryDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+#Preview("UIKit") {
+    let vc = GitRepositoryDetailViewController(
+        gitRepository: GitRepository(
+            id: 0,
+            fullName: "sample/repository",
+            htmlURL: "https://example.com",
+            owner: GitRepositoryOwner(
+                id: 100,
+                login: "sample",
+                avatarURL: "https://avatars.githubusercontent.com/u/9919?s=200&v=4"
+            ),
+            language: "Java",
+            stargazersCount: 314,
+            watchersCount: 15,
+            forksCount: 92,
+            openIssuesCount: 65
+        )
+    )
+    return UINavigationController(rootViewController: vc)
+}
