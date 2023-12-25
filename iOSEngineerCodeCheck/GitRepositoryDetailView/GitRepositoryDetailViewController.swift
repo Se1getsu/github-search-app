@@ -44,6 +44,14 @@ class GitRepositoryDetailViewController: UIViewController {
         getImage()
     }
     
+    override func viewWillLayoutSubviews() {
+        myView.activateLayoutConstraints(frameSize: myView.frame.size)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        myView.activateLayoutConstraints(frameSize: size)
+    }
+    
     func getImage() {
         myView.titleLabel.text = gitRepository.fullName
         guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else { return }
