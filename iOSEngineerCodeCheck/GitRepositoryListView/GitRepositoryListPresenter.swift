@@ -16,7 +16,8 @@ final class GitRepositoryListPresenter {
     private(set) var gitRepositories: [GitRepository] = []
     private let gitRepositorySearcher = GitRepositorySearcher()
     private var searchingTask: Task<(), Never>?
-    private var searchText: String?
+    private var textWillSearch: String?
+    private var textDidSearch: String?
     
     // MARK: メソッド
     init(view: GitRepositoryListPresenterOutput) {
@@ -49,7 +50,7 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
     
     func searchBarSearchButtonClicked(searchText: String) {
         guard !searchText.isEmpty else { return }
-        self.searchText = searchText
+        self.textWillSearch = searchText
         searchingTask = Task {
             do {
                 await MainActor.run {
@@ -62,6 +63,7 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
                     view.reloadGitRepositories()
                     view.stopActivityIndicator()
                 }
+                self.textDidSearch = searchText
             } catch {
                 if Task.isCancelled {
                     await MainActor.run {
@@ -74,9 +76,18 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
         }
     }
     
+    func searchBarCancelButtonClicked() {
+        Task {
+            await MainActor.run {
+                view.searchBarUpdateSearchText(textDidSearch ?? "")
+                view.searchBarEndEditing()
+            }
+        }
+    }
+    
     func alertRetrySelected() {
-        guard let searchText else { return }
-        searchBarSearchButtonClicked(searchText: searchText)
+        guard let textWillSearch else { return }
+        searchBarSearchButtonClicked(searchText: textWillSearch)
     }
     
     func alertCancelSelected() {

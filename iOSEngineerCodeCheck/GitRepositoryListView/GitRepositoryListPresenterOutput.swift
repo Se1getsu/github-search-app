@@ -23,4 +23,7 @@ protocol GitRepositoryListPresenterOutput: AnyObject {
     
     /// サーチバーのキーボードを閉じる。
     func searchBarEndEditing()
+    
+    /// サーチバーのサーチテキストを書き換える。
+    func searchBarUpdateSearchText(_ searchText: String)
 }

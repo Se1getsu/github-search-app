@@ -103,6 +103,10 @@ extension GitRepositoryListViewController: UISearchBarDelegate {
         guard let searchText = searchBar.text else { return }
         presenter.searchBarSearchButtonClicked(searchText: searchText)
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        presenter.searchBarCancelButtonClicked()
+    }
 }
 
 extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
@@ -133,5 +137,9 @@ extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
     
     func searchBarEndEditing() {
         searchBar.endEditing(true)
+    }
+    
+    func searchBarUpdateSearchText(_ searchText: String) {
+        searchBar.text = searchText
     }
 }
