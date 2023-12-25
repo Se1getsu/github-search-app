@@ -13,7 +13,7 @@ class GitRepositoryListViewController: UIViewController {
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "GitHubのリポジトリを検索"
-        searchBar.showsCancelButton = true
+        searchBar.showsCancelButton = false
         return searchBar
     }()
     
@@ -97,6 +97,16 @@ extension GitRepositoryListViewController: UITableViewDelegate {
 extension GitRepositoryListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBar(textDidChange: searchText)
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
