@@ -13,7 +13,7 @@ class GitRepositoryListViewController: UIViewController {
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "GitHubのリポジトリを検索"
-        searchBar.showsCancelButton = true
+        searchBar.showsCancelButton = false
         return searchBar
     }()
     
@@ -21,6 +21,18 @@ class GitRepositoryListViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
+    }()
+    
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.style = .large
+        return activityIndicatorView
+    }()
+    
+    private let noResultView: NoResultView = {
+        let noResultView = NoResultView()
+        noResultView.isHidden = true
+        return noResultView
     }()
     
     // MARK: 依存
@@ -36,8 +48,13 @@ class GitRepositoryListViewController: UIViewController {
         title = "リポジトリ検索"
         view.backgroundColor = .white
         
+        noResultView.center = view.center
+        activityIndicatorView.center = view.center
+        
         view.addSubview(searchBar)
         view.addSubview(tableView)
+        view.addSubview(activityIndicatorView)
+        view.addSubview(noResultView)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -86,23 +103,69 @@ extension GitRepositoryListViewController: UITableViewDelegate {
 }
 
 extension GitRepositoryListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchBar(textDidChange: searchText)
+    }
+    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.text = ""
+        searchBar.setShowsCancelButton(true, animated: true)
         return true
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchBar(textDidChange: searchText)
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
         presenter.searchBarSearchButtonClicked(searchText: searchText)
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        presenter.searchBarCancelButtonClicked()
+    }
 }
 
 extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
+    func showRetryOrCancelAlert(title: String, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let retry = UIAlertAction(title: "再試行", style: .default) { _ in
+            self.presenter.alertRetrySelected()
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
+            self.presenter.alertCancelSelected()
+        }
+        alert.addAction(retry)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+    
     func reloadGitRepositories() {
         tableView.reloadData()
+    }
+    
+    func startActivityIndicator() {
+        activityIndicatorView.startAnimating()
+    }
+    
+    func stopActivityIndicator() {
+        activityIndicatorView.stopAnimating()
+    }
+    
+    func searchBarEndEditing() {
+        searchBar.endEditing(true)
+    }
+    
+    func searchBarUpdateSearchText(_ searchText: String) {
+        searchBar.text = searchText
+    }
+    
+    func showNoResultView() {
+        noResultView.isHidden = false
+    }
+    
+    func hideNoResultView() {
+        noResultView.isHidden = true
     }
 }

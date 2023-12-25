@@ -17,4 +17,13 @@ protocol GitRepositoryListPresenterInput {
     
     /// サーチバーから検索が実行される処理。
     func searchBarSearchButtonClicked(searchText: String)
+    
+    /// サーチバーのキャンセルボタンが押された時の処理。
+    func searchBarCancelButtonClicked()
+    
+    /// アラートの [再試行] オプションが選択された時の処理。
+    func alertRetrySelected()
+    
+    /// アラートの [キャンセル] オプションが選択された時の処理。
+    func alertCancelSelected()
 }
