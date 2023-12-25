@@ -102,6 +102,19 @@ extension GitRepositoryListViewController: UISearchBarDelegate {
 }
 
 extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
+    func showRetryOrCancelAlert(title: String, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let retry = UIAlertAction(title: "再試行", style: .default) { _ in
+            self.presenter.alertRetrySelected()
+        }
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
+            self.presenter.alertCancelSelected()
+        }
+        alert.addAction(retry)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+    
     func reloadGitRepositories() {
         tableView.reloadData()
     }

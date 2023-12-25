@@ -15,11 +15,30 @@ final class GitRepositoryListPresenter {
     // MARK: 状態
     private(set) var gitRepositories: [GitRepository] = []
     private let gitRepositorySearcher = GitRepositorySearcher()
-    private(set) var searchingTask: Task<(), Never>?
+    private var searchingTask: Task<(), Never>?
+    private var searchText: String?
     
     // MARK: メソッド
     init(view: GitRepositoryListPresenterOutput) {
         self.view = view
+    }
+    
+    private func displayErrorAlert(error: Error) async {
+        if let error = error as? APIError {
+            await MainActor.run {
+                view.showRetryOrCancelAlert(
+                    title: error.localizedDescription,
+                    message: error.recoverySuggestion
+                )
+            }
+        } else {
+            await MainActor.run {
+                view.showRetryOrCancelAlert(
+                    title: "予期せぬエラーが発生しました",
+                    message: "エラーコード: \((error as NSError).code)"
+                )
+            }
+        }
     }
 }
 
@@ -30,6 +49,7 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
     
     func searchBarSearchButtonClicked(searchText: String) {
         guard !searchText.isEmpty else { return }
+        self.searchText = searchText
         searchingTask = Task {
             do {
                 let gitRepositories = try await gitRepositorySearcher.search(query: searchText).items
@@ -42,10 +62,18 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
                     // TODO: タスクがキャンセルされた時の処理
                     
                 } else {
-                    // TODO: エラーハンドリング
-                    print(error)
+                    await displayErrorAlert(error: error)
                 }
             }
         }
+    }
+    
+    func alertRetrySelected() {
+        guard let searchText else { return }
+        searchBarSearchButtonClicked(searchText: searchText)
+    }
+    
+    func alertCancelSelected() {
+        // TODO: キャンセルされた時の処理
     }
 }
