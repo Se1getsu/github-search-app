@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import Foundation
 
 /// GitHubAPI を呼び出して Git リポジトリの検索を行う。
 struct GitRepositorySearcher {
@@ -33,7 +34,7 @@ struct GitRepositorySearcher {
             return data
             
         case .failure(let error):
-            throw error
+            throw APIError.classify(error)
         }
     }
 }
