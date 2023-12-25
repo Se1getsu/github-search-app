@@ -86,11 +86,6 @@ extension GitRepositoryListViewController: UITableViewDelegate {
 }
 
 extension GitRepositoryListViewController: UISearchBarDelegate {
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.text = ""
-        return true
-    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBar(textDidChange: searchText)
     }
