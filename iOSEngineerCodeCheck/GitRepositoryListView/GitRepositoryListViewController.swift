@@ -29,6 +29,12 @@ class GitRepositoryListViewController: UIViewController {
         return activityIndicatorView
     }()
     
+    private let noResultView: NoResultView = {
+        let noResultView = NoResultView()
+        noResultView.isHidden = true
+        return noResultView
+    }()
+    
     // MARK: 依存
     private var presenter: GitRepositoryListPresenterInput!
     
@@ -42,11 +48,13 @@ class GitRepositoryListViewController: UIViewController {
         title = "リポジトリ検索"
         view.backgroundColor = .white
         
+        noResultView.center = view.center
         activityIndicatorView.center = view.center
         
         view.addSubview(searchBar)
         view.addSubview(tableView)
         view.addSubview(activityIndicatorView)
+        view.addSubview(noResultView)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -151,5 +159,13 @@ extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
     
     func searchBarUpdateSearchText(_ searchText: String) {
         searchBar.text = searchText
+    }
+    
+    func showNoResultView() {
+        noResultView.isHidden = false
+    }
+    
+    func hideNoResultView() {
+        noResultView.isHidden = true
     }
 }

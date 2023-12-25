@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 final class GitRepositoryListPresenter {
     // MARK: 依存
@@ -41,6 +42,15 @@ final class GitRepositoryListPresenter {
             }
         }
     }
+    
+    private func updateGitRepositoriesOnView() {
+        view.reloadGitRepositories()
+        if gitRepositories.isEmpty {
+            view.showNoResultView()
+        } else {
+            view.hideNoResultView()
+        }
+    }
 }
 
 extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
@@ -60,7 +70,7 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
                 let gitRepositories = try await gitRepositorySearcher.search(query: searchText).items
                 await MainActor.run {
                     self.gitRepositories = gitRepositories
-                    view.reloadGitRepositories()
+                    updateGitRepositoriesOnView()
                     view.stopActivityIndicator()
                 }
                 self.textDidSearch = searchText

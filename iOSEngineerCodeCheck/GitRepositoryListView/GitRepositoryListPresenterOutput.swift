@@ -26,4 +26,10 @@ protocol GitRepositoryListPresenterOutput: AnyObject {
     
     /// サーチバーのサーチテキストを書き換える。
     func searchBarUpdateSearchText(_ searchText: String)
+    
+    /// 検索結果なしの表示を出す。
+    func showNoResultView()
+    
+    /// 検索結果なしの表示を隠す。
+    func hideNoResultView()
 }
