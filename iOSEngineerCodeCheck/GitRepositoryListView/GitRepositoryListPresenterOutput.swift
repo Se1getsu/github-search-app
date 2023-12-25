@@ -20,4 +20,7 @@ protocol GitRepositoryListPresenterOutput: AnyObject {
     
     /// ActivityIndicator のアニメーションを停止する。
     func stopActivityIndicator()
+    
+    /// サーチバーのキーボードを閉じる。
+    func searchBarEndEditing()
 }

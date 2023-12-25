@@ -53,6 +53,7 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
         searchingTask = Task {
             do {
                 await MainActor.run {
+                    view.searchBarEndEditing()
                     view.startActivityIndicator()
                 }
                 let gitRepositories = try await gitRepositorySearcher.search(query: searchText).items

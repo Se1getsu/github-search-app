@@ -130,4 +130,8 @@ extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
     func stopActivityIndicator() {
         activityIndicatorView.stopAnimating()
     }
+    
+    func searchBarEndEditing() {
+        searchBar.endEditing(true)
+    }
 }
