@@ -23,6 +23,12 @@ class GitRepositoryListViewController: UIViewController {
         return tableView
     }()
     
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.style = .large
+        return activityIndicatorView
+    }()
+    
     // MARK: 依存
     private var presenter: GitRepositoryListPresenterInput!
     
@@ -36,8 +42,11 @@ class GitRepositoryListViewController: UIViewController {
         title = "リポジトリ検索"
         view.backgroundColor = .white
         
+        activityIndicatorView.center = view.center
+        
         view.addSubview(searchBar)
         view.addSubview(tableView)
+        view.addSubview(activityIndicatorView)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -112,5 +121,13 @@ extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
     
     func reloadGitRepositories() {
         tableView.reloadData()
+    }
+    
+    func startActivityIndicator() {
+        activityIndicatorView.startAnimating()
+    }
+    
+    func stopActivityIndicator() {
+        activityIndicatorView.stopAnimating()
     }
 }

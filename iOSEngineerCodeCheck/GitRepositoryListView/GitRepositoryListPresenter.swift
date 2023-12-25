@@ -52,15 +52,20 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
         self.searchText = searchText
         searchingTask = Task {
             do {
+                await MainActor.run {
+                    view.startActivityIndicator()
+                }
                 let gitRepositories = try await gitRepositorySearcher.search(query: searchText).items
                 await MainActor.run {
                     self.gitRepositories = gitRepositories
                     view.reloadGitRepositories()
+                    view.stopActivityIndicator()
                 }
             } catch {
                 if Task.isCancelled {
-                    // TODO: タスクがキャンセルされた時の処理
-                    
+                    await MainActor.run {
+                        view.stopActivityIndicator()
+                    }
                 } else {
                     await displayErrorAlert(error: error)
                 }
@@ -74,6 +79,10 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
     }
     
     func alertCancelSelected() {
-        // TODO: キャンセルされた時の処理
+        Task {
+            await MainActor.run {
+                view.stopActivityIndicator()
+            }
+        }
     }
 }

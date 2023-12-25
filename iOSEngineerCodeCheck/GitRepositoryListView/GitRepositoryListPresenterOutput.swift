@@ -14,4 +14,10 @@ protocol GitRepositoryListPresenterOutput: AnyObject {
     
     /// アラートを表示する。ユーザには [再試行] および [キャンセル] の選択肢を与える。
     func showRetryOrCancelAlert(title: String, message: String?)
+    
+    /// ActivityIndicator のアニメーションを開始する。
+    func startActivityIndicator()
+    
+    /// ActivityIndicator のアニメーションを停止する。
+    func stopActivityIndicator()
 }
