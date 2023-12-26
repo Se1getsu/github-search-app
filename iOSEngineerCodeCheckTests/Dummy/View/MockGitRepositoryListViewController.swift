@@ -64,6 +64,6 @@ class MockGitRepositoryListViewController: GitRepositoryListPresenterOutput {
     }
     
     func hideGuidance() {
-        showingGuidance = true
+        showingGuidance = false
     }
 }

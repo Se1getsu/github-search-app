@@ -15,14 +15,17 @@ class MockGitRepositorySearcher: GitRepositorySearcherProtocol {
     
     // MARK: Will Return
     var result: GitRepositorySearchResult
+    var returningInterval: TimeInterval
     
     // MARK: メソッド
-    init(result: GitRepositorySearchResult) {
+    init(result: GitRepositorySearchResult, returningInterval: TimeInterval) {
         self.result = result
+        self.returningInterval = returningInterval
     }
     
     func search(query: String) async throws -> GitRepositorySearchResult {
         self.query = query
+        try await Task.sleep(nanoseconds: UInt64(returningInterval * 1_000_000_000))
         return result
     }
 }
