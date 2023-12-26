@@ -98,4 +98,26 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         XCTAssertNil(view.gitRepositories)
         XCTAssertFalse(view.activityIndicatorAnimating)
     }
+    
+    func test_キャンセルボタンの処理_パターン1() {
+        presenter.searchBarCancelButtonClicked()
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "結果がViewに反映されるまで待機")], timeout: 0.05)
+        XCTAssertEqual(view.searchBarUpdatedText, "")
+        XCTAssertTrue(view.searchBarEndEditingCalled)
+    }
+        
+    func test_キャンセルボタンの処理_パターン2() {
+        let searchText = "sample"
+        gitRepositorySearcher.returningInterval = 0.0
+        presenter.searchBarSearchButtonClicked(searchText: searchText)
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "結果がViewに反映されるまで待機")], timeout: 0.05)
+        presenter.searchBar(textDidChange: "test")
+        presenter.searchBarCancelButtonClicked()
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "結果がViewに反映されるまで待機")], timeout: 0.05)
+        XCTAssertEqual(view.searchBarUpdatedText, searchText)
+        XCTAssertTrue(view.searchBarEndEditingCalled)
+    }
 }
