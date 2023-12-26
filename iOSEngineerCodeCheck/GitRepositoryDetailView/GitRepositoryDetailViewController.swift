@@ -43,7 +43,7 @@ class GitRepositoryDetailViewController: UIViewController {
         myView.watchesLabel.text = "\(gitRepository.watchersCount) watchers"
         myView.forksLabel.text = "\(gitRepository.forksCount) forks"
         myView.issuesLabel.text = "\(gitRepository.openIssuesCount) open issues"
-        getImage()
+        fetchAndShowImage()
     }
     
     override func viewWillLayoutSubviews() {
@@ -54,11 +54,11 @@ class GitRepositoryDetailViewController: UIViewController {
         myView.activateLayoutConstraints(frameSize: size)
     }
     
-    func getImage() {
+    private func fetchAndShowImage() {
         myView.titleLabel.text = gitRepository.fullName
         guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else { return }
         Task {
-            let image = try await imageFetcher.fetchImage(from: url)
+            guard let image = try? await imageFetcher.fetchImage(from: url) else { return }
             await MainActor.run {
                 myView.imageView.image = image
             }
