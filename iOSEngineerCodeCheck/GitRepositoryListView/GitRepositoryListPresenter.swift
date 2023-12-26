@@ -58,6 +58,7 @@ final class GitRepositoryListPresenter {
         await MainActor.run {
             textWillSearch = searchText
             view.searchBarEndEditing()
+            view.hideGuidance()
             view.startActivityIndicator()
         }
     }

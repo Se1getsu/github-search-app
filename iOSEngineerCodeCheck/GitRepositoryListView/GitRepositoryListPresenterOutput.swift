@@ -32,4 +32,7 @@ protocol GitRepositoryListPresenterOutput: AnyObject {
     
     /// 検索結果なしの表示を隠す。
     func hideNoResultView()
+    
+    /// サーチバーへの入力を促すガイダンス表示を隠す。
+    func hideGuidance()
 }
