@@ -22,8 +22,10 @@ final class GitRepositoryListPresenterTests: XCTestCase {
     override func setUp() {
         view = MockGitRepositoryListViewController()
         gitRepositorySearcher = MockGitRepositorySearcher(
-            result: GitRepositorySearchResult(
-                items: dummyGitRepositories
+            result: .success(
+                GitRepositorySearchResult(
+                    items: dummyGitRepositories
+                )
             ),
             returningInterval: 0.1
         )
@@ -55,5 +57,19 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         _ = XCTWaiter.wait(for: [expectation(description: "読み込みが完了するまで待機")], timeout: 0.15)
         XCTAssertEqual(view.gitRepositories?.count, 3)
         XCTAssertFalse(view.activityIndicatorAnimating)
+    }
+    
+    func test_検索_APIエラー() {
+        let searchText = "sample"
+        let error = APIError.notConnectedToInternet
+        gitRepositorySearcher.result = .failure(error)
+        gitRepositorySearcher.returningInterval = 0.05
+        presenter.searchBarSearchButtonClicked(searchText: searchText)
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "結果がViewに反映されるまで待機")], timeout: 0.1)
+        let alert = view.showRetryOrCancelAlertArguments
+        XCTAssertNotNil(alert)
+        XCTAssertEqual(alert!.title, error.localizedDescription)
+        XCTAssertEqual(alert!.message, error.recoverySuggestion)
     }
 }

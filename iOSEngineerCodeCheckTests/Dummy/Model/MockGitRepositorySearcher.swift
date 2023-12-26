@@ -14,11 +14,11 @@ class MockGitRepositorySearcher: GitRepositorySearcherProtocol {
     private(set) var query: String?
     
     // MARK: Will Return
-    var result: GitRepositorySearchResult
+    var result: Result<GitRepositorySearchResult, Error>
     var returningInterval: TimeInterval
     
     // MARK: メソッド
-    init(result: GitRepositorySearchResult, returningInterval: TimeInterval) {
+    init(result: Result<GitRepositorySearchResult, Error>, returningInterval: TimeInterval) {
         self.result = result
         self.returningInterval = returningInterval
     }
@@ -26,6 +26,11 @@ class MockGitRepositorySearcher: GitRepositorySearcherProtocol {
     func search(query: String) async throws -> GitRepositorySearchResult {
         self.query = query
         try await Task.sleep(nanoseconds: UInt64(returningInterval * 1_000_000_000))
-        return result
+        switch result {
+        case .success(let result):
+            return result
+        case .failure(let error):
+            throw error
+        }
     }
 }
