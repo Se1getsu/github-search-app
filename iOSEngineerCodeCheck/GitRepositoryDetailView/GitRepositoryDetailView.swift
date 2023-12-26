@@ -163,7 +163,8 @@ final class GitRepositoryDetailView: UIView {
             watchersCount: 15,
             forksCount: 92,
             openIssuesCount: 65
-        )
+        ),
+        imageFetcher: ImageFetcher()
     )
     return UINavigationController(rootViewController: vc)
 }
