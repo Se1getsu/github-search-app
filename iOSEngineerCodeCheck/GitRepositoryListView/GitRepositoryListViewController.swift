@@ -46,7 +46,7 @@ class GitRepositoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "リポジトリ検索"
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         noResultView.center = view.center
         activityIndicatorView.center = view.center
