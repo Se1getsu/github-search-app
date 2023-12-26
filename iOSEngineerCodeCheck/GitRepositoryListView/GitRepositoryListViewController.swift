@@ -172,3 +172,13 @@ extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
         noResultView.isHidden = true
     }
 }
+
+#Preview("UIKit") {
+    let vc = GitRepositoryListViewController()
+    let presenter = GitRepositoryListPresenter(
+        view: vc,
+        gitRepositorySearcher: GitRepositorySearcher()
+    )
+    vc.inject(presenter: presenter)
+    return UINavigationController(rootViewController: vc)
+}
