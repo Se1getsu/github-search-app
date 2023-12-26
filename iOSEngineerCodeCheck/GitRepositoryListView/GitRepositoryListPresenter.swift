@@ -12,7 +12,7 @@ import Combine
 final class GitRepositoryListPresenter {
     // MARK: 依存
     private weak var view: GitRepositoryListPresenterOutput!
-    private let gitRepositorySearcher: GitRepositorySearcher
+    private let gitRepositorySearcher: GitRepositorySearcherProtocol
     
     // MARK: 状態
     private(set) var gitRepositories: [GitRepository] = []
@@ -21,7 +21,7 @@ final class GitRepositoryListPresenter {
     private var textDidSearch: String?
     
     // MARK: メソッド
-    init(view: GitRepositoryListPresenterOutput, gitRepositorySearcher: GitRepositorySearcher) {
+    init(view: GitRepositoryListPresenterOutput, gitRepositorySearcher: GitRepositorySearcherProtocol) {
         self.view = view
         self.gitRepositorySearcher = gitRepositorySearcher
     }
