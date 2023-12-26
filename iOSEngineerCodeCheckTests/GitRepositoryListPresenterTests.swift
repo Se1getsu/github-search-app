@@ -72,4 +72,18 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         XCTAssertEqual(alert!.title, error.localizedDescription)
         XCTAssertEqual(alert!.message, error.recoverySuggestion)
     }
+    
+    func test_検索_予期せぬエラー() {
+        let searchText = "sample"
+        let error = NSError(domain: "TestDomain", code: 123)
+        gitRepositorySearcher.result = .failure(error)
+        gitRepositorySearcher.returningInterval = 0.05
+        presenter.searchBarSearchButtonClicked(searchText: searchText)
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "結果がViewに反映されるまで待機")], timeout: 0.1)
+        let alert = view.showRetryOrCancelAlertArguments
+        XCTAssertNotNil(alert)
+        XCTAssertEqual(alert!.title, "予期せぬエラーが発生しました")
+        XCTAssertEqual(alert!.message, "エラーコード: 123")
+    }
 }
