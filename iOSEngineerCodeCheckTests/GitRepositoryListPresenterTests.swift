@@ -86,4 +86,16 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         XCTAssertEqual(alert!.title, "予期せぬエラーが発生しました")
         XCTAssertEqual(alert!.message, "エラーコード: 123")
     }
+    
+    func test_検索完了前に検索テキストを変更するとキャンセル() {
+        let searchText = "sample"
+        presenter.searchBarSearchButtonClicked(searchText: searchText)
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
+        presenter.searchBar(textDidChange: "sampl")
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "結果がViewに反映されるまで待機")], timeout: 0.1)
+        XCTAssertNil(view.gitRepositories)
+        XCTAssertFalse(view.activityIndicatorAnimating)
+    }
 }
