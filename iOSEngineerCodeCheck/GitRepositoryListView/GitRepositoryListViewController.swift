@@ -35,6 +35,16 @@ class GitRepositoryListViewController: UIViewController {
         return noResultView
     }()
     
+    private let guidanceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "上の検索バーにキーワードを入力して\nGitHubのリポジトリを検索します。"
+        label.numberOfLines = 2
+        label.textColor = .secondaryLabel
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        return label
+    }()
+    
     // MARK: 依存
     private var presenter: GitRepositoryListPresenterInput!
     
@@ -48,13 +58,14 @@ class GitRepositoryListViewController: UIViewController {
         title = "リポジトリ検索"
         view.backgroundColor = .systemBackground
         
-        noResultView.center = view.center
         activityIndicatorView.center = view.center
+        noResultView.center = view.center
         
         view.addSubview(searchBar)
         view.addSubview(tableView)
         view.addSubview(activityIndicatorView)
         view.addSubview(noResultView)
+        view.addSubview(guidanceLabel)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -69,6 +80,12 @@ class GitRepositoryListViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        guidanceLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            guidanceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            guidanceLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
         tableView.dataSource = self
@@ -171,4 +188,18 @@ extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
     func hideNoResultView() {
         noResultView.isHidden = true
     }
+    
+    func hideGuidance() {
+        guidanceLabel.isHidden = true
+    }
+}
+
+#Preview("UIKit") {
+    let vc = GitRepositoryListViewController()
+    let presenter = GitRepositoryListPresenter(
+        view: vc,
+        gitRepositorySearcher: GitRepositorySearcher()
+    )
+    vc.inject(presenter: presenter)
+    return UINavigationController(rootViewController: vc)
 }
