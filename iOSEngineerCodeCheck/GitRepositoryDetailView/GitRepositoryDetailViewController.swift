@@ -58,7 +58,7 @@ class GitRepositoryDetailViewController: UIViewController {
         myView.titleLabel.text = gitRepository.fullName
         guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else { return }
         Task {
-            let image = try await imageFetcher.fetchImage(from: url)
+            guard let image = try? await imageFetcher.fetchImage(from: url) else { return }
             await MainActor.run {
                 myView.imageView.image = image
             }
