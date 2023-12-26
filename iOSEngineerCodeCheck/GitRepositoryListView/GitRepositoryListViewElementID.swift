@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum GitRepositoryListViewElementID: String {
-    case searchBar = "Git Repository Search Bar"
-    case tableView = "Git Repository List Table"
-    case activityIndicatorView = "Git Repository Search Activity Indicator View"
-    case noResultView = "No Result View"
-    case guidanceLabel = "Search Guidance Label"
+enum GitRepositoryListViewElementID {
+    static let searchBar = "Git Repository Search Bar"
+    static let tableView = "Git Repository List Table"
+    static let activityIndicatorView = "Git Repository Search Activity Indicator View"
+    static let noResultView = "No Result View"
+    static let guidanceLabel = "Search Guidance Label"
 }
