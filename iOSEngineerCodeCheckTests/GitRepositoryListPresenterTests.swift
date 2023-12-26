@@ -120,4 +120,46 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         XCTAssertEqual(view.searchBarUpdatedText, searchText)
         XCTAssertTrue(view.searchBarEndEditingCalled)
     }
+    
+    func test_アラート_再試行() {
+        let searchText = "sample"
+        let error = APIError.notConnectedToInternet
+        gitRepositorySearcher.result = .failure(error)
+        gitRepositorySearcher.returningInterval = 0.0
+        presenter.searchBarSearchButtonClicked(searchText: searchText)
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "結果がViewに反映されるまで待機")], timeout: 0.05)
+        gitRepositorySearcher.result = .success(
+            GitRepositorySearchResult(items: dummyGitRepositories)
+        )
+        gitRepositorySearcher.returningInterval = 0.1
+        gitRepositorySearcher.resetCallInfo()   // リセット
+        view.gitRepositories = nil              // リセット
+        presenter.alertRetrySelected()
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
+        XCTAssertEqual(gitRepositorySearcher.query, searchText)
+        XCTAssertTrue(view.activityIndicatorAnimating)
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "読み込みが完了するまで待機")], timeout: 0.1)
+        XCTAssertEqual(view.gitRepositories?.count, 3)
+        XCTAssertFalse(view.activityIndicatorAnimating)
+    }
+    
+    func test_アラート_キャンセル() {
+        let searchText = "sample"
+        let error = APIError.notConnectedToInternet
+        gitRepositorySearcher.result = .failure(error)
+        gitRepositorySearcher.returningInterval = 0.0
+        presenter.searchBarSearchButtonClicked(searchText: searchText)
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "結果がViewに反映されるまで待機")], timeout: 0.05)
+        gitRepositorySearcher.result = .success(
+            GitRepositorySearchResult(items: dummyGitRepositories)
+        )
+        presenter.alertCancelSelected()
+        
+        _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
+        XCTAssertFalse(view.activityIndicatorAnimating)
+    }
 }

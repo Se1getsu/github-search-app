@@ -10,6 +10,9 @@ import Foundation
 @testable import iOSEngineerCodeCheck
 
 class MockGitRepositorySearcher: GitRepositorySearcherProtocol {
+    // MARK: Called Count
+    private(set) var searchCalledCount = 0
+    
     // MARK: Received Argument
     private(set) var query: String?
     
@@ -23,7 +26,14 @@ class MockGitRepositorySearcher: GitRepositorySearcherProtocol {
         self.returningInterval = returningInterval
     }
     
+    /// Called Count と Received Argument の情報をリセットする。
+    func resetCallInfo() {
+        searchCalledCount = 0
+        query = nil
+    }
+    
     func search(query: String) async throws -> GitRepositorySearchResult {
+        searchCalledCount += 1
         self.query = query
         try await Task.sleep(nanoseconds: UInt64(returningInterval * 1_000_000_000))
         switch result {
