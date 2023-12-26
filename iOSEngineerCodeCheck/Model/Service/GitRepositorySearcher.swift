@@ -10,15 +10,8 @@ import Alamofire
 import Foundation
 
 /// GitHubAPI を呼び出して Git リポジトリの検索を行う。
-struct GitRepositorySearcher {
-    /// GitHubAPI のリポジトリ検索時のレスポンスデータ。
-    struct APIResponseData: Decodable {
-        let items: [GitRepository]
-    }
-    
-    /// Git リポジトリの検索を行う。
-    /// - parameter query: 1つ以上の検索キーワードと修飾子を含むクエリ。
-    func search(query: String) async throws -> APIResponseData {
+struct GitRepositorySearcher: GitRepositorySearcherProtocol {
+    func search(query: String) async throws -> GitRepositorySearchResult {
         let url = "https://api.github.com/search/repositories"
         let parameters = [
             "q": query
@@ -27,7 +20,9 @@ struct GitRepositorySearcher {
             "Accept": "application/vnd.github+json",
             "X-GitHub-Api-Version": "2022-11-28"
         ]
-        let response = await AF.request(url, parameters: parameters, headers: headers).serializingDecodable(APIResponseData.self).response
+        let response = await AF.request(url, parameters: parameters, headers: headers)
+            .serializingDecodable(GitRepositorySearchResult.self)
+            .response
         
         switch response.result {
         case .success(let data):

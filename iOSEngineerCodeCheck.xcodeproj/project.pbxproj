@@ -18,6 +18,8 @@
 		A69765252B37D545001B8136 /* GitRepositoryOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69765242B37D545001B8136 /* GitRepositoryOwner.swift */; };
 		A697652A2B37EFF3001B8136 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69765292B37EFF3001B8136 /* ImageFetcher.swift */; };
 		A69D7C5C2B3951CB00DC5637 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D7C5B2B3951CB00DC5637 /* NoResultView.swift */; };
+		A69D7C5F2B3A653600DC5637 /* GitRepositorySearcherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D7C5E2B3A653600DC5637 /* GitRepositorySearcherProtocol.swift */; };
+		A69D7C612B3A65A500DC5637 /* GitRepositorySearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D7C602B3A65A500DC5637 /* GitRepositorySearchResult.swift */; };
 		BF0A658D244F2A3B00280FA6 /* GitRepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* GitRepositoryDetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -56,6 +58,8 @@
 		A69765242B37D545001B8136 /* GitRepositoryOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryOwner.swift; sourceTree = "<group>"; };
 		A69765292B37EFF3001B8136 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
 		A69D7C5B2B3951CB00DC5637 /* NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
+		A69D7C5E2B3A653600DC5637 /* GitRepositorySearcherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositorySearcherProtocol.swift; sourceTree = "<group>"; };
+		A69D7C602B3A65A500DC5637 /* GitRepositorySearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositorySearchResult.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* GitRepositoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryDetailViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				A69765262B37D957001B8136 /* Entity */,
+				A69D7C622B3A667600DC5637 /* Error */,
 				A69765272B37D9CA001B8136 /* Service */,
 			);
 			path = Model;
@@ -132,6 +137,7 @@
 			children = (
 				A69765202B37C6C2001B8136 /* GitRepository.swift */,
 				A69765242B37D545001B8136 /* GitRepositoryOwner.swift */,
+				A69D7C602B3A65A500DC5637 /* GitRepositorySearchResult.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -139,7 +145,7 @@
 		A69765272B37D9CA001B8136 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				A660E6B22B3915DA00946D63 /* APIError.swift */,
+				A69D7C5E2B3A653600DC5637 /* GitRepositorySearcherProtocol.swift */,
 				A69765222B37D094001B8136 /* GitRepositorySearcher.swift */,
 				A69765292B37EFF3001B8136 /* ImageFetcher.swift */,
 			);
@@ -152,6 +158,14 @@
 				A69D7C5B2B3951CB00DC5637 /* NoResultView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A69D7C622B3A667600DC5637 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				A660E6B22B3915DA00946D63 /* APIError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		BFD945D2244DC5E80012785A = {
@@ -350,6 +364,7 @@
 				BFD945E3244DC5E80012785A /* GitRepositoryListViewController.swift in Sources */,
 				A69765212B37C6C2001B8136 /* GitRepository.swift in Sources */,
 				A6519E9B2B38526800335D24 /* GitRepositoryDetailView.swift in Sources */,
+				A69D7C612B3A65A500DC5637 /* GitRepositorySearchResult.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* GitRepositoryDetailViewController.swift in Sources */,
 				A69D7C5C2B3951CB00DC5637 /* NoResultView.swift in Sources */,
 				A6519E922B382FC100335D24 /* GitRepositoryListPresenter.swift in Sources */,
@@ -358,6 +373,7 @@
 				A69765232B37D094001B8136 /* GitRepositorySearcher.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 				A6519E942B38300700335D24 /* GitRepositoryListPresenterInput.swift in Sources */,
+				A69D7C5F2B3A653600DC5637 /* GitRepositorySearcherProtocol.swift in Sources */,
 				A697652A2B37EFF3001B8136 /* ImageFetcher.swift in Sources */,
 				A6519E962B38300F00335D24 /* GitRepositoryListPresenterOutput.swift in Sources */,
 				A660E6B32B3915DA00946D63 /* APIError.swift in Sources */,

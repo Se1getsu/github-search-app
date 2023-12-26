@@ -12,17 +12,18 @@ import Combine
 final class GitRepositoryListPresenter {
     // MARK: 依存
     private weak var view: GitRepositoryListPresenterOutput!
+    private let gitRepositorySearcher: GitRepositorySearcherProtocol
     
     // MARK: 状態
     private(set) var gitRepositories: [GitRepository] = []
-    private let gitRepositorySearcher = GitRepositorySearcher()
     private var searchingTask: Task<(), Never>?
     private var textWillSearch: String?
     private var textDidSearch: String?
     
     // MARK: メソッド
-    init(view: GitRepositoryListPresenterOutput) {
+    init(view: GitRepositoryListPresenterOutput, gitRepositorySearcher: GitRepositorySearcherProtocol) {
         self.view = view
+        self.gitRepositorySearcher = gitRepositorySearcher
     }
     
     private func displayErrorAlert(error: Error) async {

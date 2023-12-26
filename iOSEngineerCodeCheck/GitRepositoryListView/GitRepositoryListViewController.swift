@@ -97,7 +97,10 @@ extension GitRepositoryListViewController: UITableViewDataSource {
 extension GitRepositoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = GitRepositoryDetailViewController(gitRepository: presenter.gitRepositories[indexPath.row])
+        let vc = GitRepositoryDetailViewController(
+            gitRepository: presenter.gitRepositories[indexPath.row],
+            imageFetcher: ImageFetcher()
+        )
         navigationController?.pushViewController(vc, animated: true)
     }
 }

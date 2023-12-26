@@ -11,13 +11,15 @@ import UIKit
 class GitRepositoryDetailViewController: UIViewController {
     // MARK: 依存
     private let myView = GitRepositoryDetailView()
+    private let imageFetcher: ImageFetcher
     
     // MARK: 状態
     private var gitRepository: GitRepository
     
     // MARK: メソッド
-    init(gitRepository: GitRepository) {
+    init(gitRepository: GitRepository, imageFetcher: ImageFetcher) {
         self.gitRepository = gitRepository
+        self.imageFetcher = imageFetcher
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -56,7 +58,7 @@ class GitRepositoryDetailViewController: UIViewController {
         myView.titleLabel.text = gitRepository.fullName
         guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else { return }
         Task {
-            let image = try await ImageFetcher().fetchImage(from: url)
+            let image = try await imageFetcher.fetchImage(from: url)
             await MainActor.run {
                 myView.imageView.image = image
             }
