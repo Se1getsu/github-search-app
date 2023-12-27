@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// GIt リポジトリの並び順。
 enum GitRepositorySortOption: String {
     case bestMatch = ""
     case stars = "stars"
