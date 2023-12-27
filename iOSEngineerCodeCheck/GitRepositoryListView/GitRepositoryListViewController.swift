@@ -17,6 +17,8 @@ class GitRepositoryListViewController: UIViewController {
         searchBar.placeholder = "GitHubのリポジトリを検索"
         searchBar.showsCancelButton = false
         searchBar.accessibilityIdentifier = ElementID.searchBar
+        searchBar.barTintColor = AppColor.searchBarBarTint
+        searchBar.tintColor = AppColor.base
         return searchBar
     }()
     
@@ -24,6 +26,7 @@ class GitRepositoryListViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.accessibilityIdentifier = ElementID.tableView
+        tableView.backgroundColor = AppColor.background
         return tableView
     }()
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A621C6C12B3C051300F0E060 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A621C6C02B3C051300F0E060 /* AppColor.swift */; };
 		A632347E2B3B14A7000C89C2 /* GitRepositoryDetailViewElementID.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632347D2B3B14A7000C89C2 /* GitRepositoryDetailViewElementID.swift */; };
 		A64CCFA62B3B24E500C19CA6 /* GitRepositoryListViewElementID.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691B1222B3B0F6E0002F405 /* GitRepositoryListViewElementID.swift */; };
 		A6519E922B382FC100335D24 /* GitRepositoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6519E912B382FC100335D24 /* GitRepositoryListPresenter.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A621C6C02B3C051300F0E060 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		A632347D2B3B14A7000C89C2 /* GitRepositoryDetailViewElementID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryDetailViewElementID.swift; sourceTree = "<group>"; };
 		A6519E912B382FC100335D24 /* GitRepositoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryListPresenter.swift; sourceTree = "<group>"; };
 		A6519E932B38300700335D24 /* GitRepositoryListPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryListPresenterInput.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				A6519E972B38516600335D24 /* GitRepositoryDetailView */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
+				A621C6C02B3C051300F0E060 /* AppColor.swift */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
@@ -429,6 +432,7 @@
 				A697652A2B37EFF3001B8136 /* ImageFetcher.swift in Sources */,
 				A6519E962B38300F00335D24 /* GitRepositoryListPresenterOutput.swift in Sources */,
 				A660E6B32B3915DA00946D63 /* APIError.swift in Sources */,
+				A621C6C12B3C051300F0E060 /* AppColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
