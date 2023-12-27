@@ -29,7 +29,7 @@ struct GitRepositorySearcher: GitRepositorySearcherProtocol {
             return data
             
         case .failure(let error):
-            throw APIError.classify(error)
+            throw NetworkError.classify(error)
         }
     }
 }
