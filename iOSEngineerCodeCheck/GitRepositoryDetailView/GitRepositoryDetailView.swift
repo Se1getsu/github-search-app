@@ -12,6 +12,12 @@ final class GitRepositoryDetailView: UIView {
     private typealias ElementID = GitRepositoryDetailViewElementID
     
     // MARK: UI
+    let backgroundView: UIView = {
+        let myView = UIView()
+        myView.backgroundColor = .systemPurple.withAlphaComponent(0.1)
+        return myView
+    }()
+    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -86,6 +92,7 @@ final class GitRepositoryDetailView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         
+        addSubview(backgroundView)
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(languageLabel)
@@ -95,13 +102,21 @@ final class GitRepositoryDetailView: UIView {
         stackView.addArrangedSubview(forksLabel)
         stackView.addArrangedSubview(issuesLabel)
         
+        // MARK: 共通のレイアウト
         let safeArea = safeAreaLayoutGuide
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        ])
+        
+        // MARK: 縦長のレイアウト
         imageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         languageLabel.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // MARK: 縦長のレイアウト
         commonConstraints = [
             imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
             imageView.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.9),
