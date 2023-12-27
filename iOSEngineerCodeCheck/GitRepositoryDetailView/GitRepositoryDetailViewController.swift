@@ -9,6 +9,8 @@
 import UIKit
 
 class GitRepositoryDetailViewController: UIViewController {
+    private typealias ElementID = GitRepositoryDetailViewElementID
+    
     // MARK: 依存
     private let myView = GitRepositoryDetailView()
     private let imageFetcher: ImageFetcher
@@ -31,6 +33,7 @@ class GitRepositoryDetailViewController: UIViewController {
         super.viewDidLoad()
         title = gitRepository.fullName
         view = myView
+        SetUpNavigationBar()
         
         myView.languageLabel.text = {
             if let language = gitRepository.language {
@@ -46,12 +49,27 @@ class GitRepositoryDetailViewController: UIViewController {
         fetchAndShowImage()
     }
     
+    private func SetUpNavigationBar() {
+        let browseBarButton = UIBarButtonItem(
+            image: UIImage(systemName: "safari"),
+            style: .plain,
+            target: self,
+            action: #selector(browseButtonTapped(_:))
+        )
+        browseBarButton.accessibilityIdentifier = ElementID.browseBarButton
+        navigationItem.rightBarButtonItem = browseBarButton
+    }
+    
     override func viewWillLayoutSubviews() {
         myView.activateLayoutConstraints(frameSize: myView.frame.size)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         myView.activateLayoutConstraints(frameSize: size)
+    }
+    
+    @objc func browseButtonTapped(_ sender: UIBarButtonItem) {
+        browse()
     }
     
     private func fetchAndShowImage() {
@@ -63,5 +81,11 @@ class GitRepositoryDetailViewController: UIViewController {
                 myView.imageView.image = image
             }
         }
+    }
+    
+    private func browse() {
+        let htmlURL = gitRepository.htmlURL
+        guard let url = URL(string: htmlURL) else { return }
+        UIApplication.shared.open(url)
     }
 }
