@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// UITestのために設定する accessibilityIdentifier をまとめたもの。
 enum GitRepositoryDetailViewElementID {
     static let imageView = "Git Repository Image View"
     static let titleLabel = "Git Repository Title Label"
