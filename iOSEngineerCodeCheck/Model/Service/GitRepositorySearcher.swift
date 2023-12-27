@@ -11,10 +11,11 @@ import Foundation
 
 /// GitHubAPI を呼び出して Git リポジトリの検索を行う。
 struct GitRepositorySearcher: GitRepositorySearcherProtocol {
-    func search(query: String) async throws -> GitRepositorySearchResult {
+    func search(query: String, sortOption: GitRepositorySortOption) async throws -> GitRepositorySearchResult {
         let url = "https://api.github.com/search/repositories"
         let parameters = [
-            "q": query
+            "q": query,
+            "sort": sortOption.rawValue
         ]
         let headers: HTTPHeaders = [
             "Accept": "application/vnd.github+json",
