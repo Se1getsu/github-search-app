@@ -13,7 +13,7 @@ enum APIError: LocalizedError {
     case notConnectedToInternet
     case unknownError(Error)
     
-    /// アラートのタイトルとして表示する文字列
+    /// アラートのタイトルとして表示する文字列。
     var localizedDescription: String {
         switch self {
         case .notConnectedToInternet:
@@ -23,7 +23,7 @@ enum APIError: LocalizedError {
         }
     }
     
-    /// アラートのメッセージとして表示する文字列
+    /// アラートのメッセージとして表示する文字列。
     var recoverySuggestion: String? {
         switch self {
         case .notConnectedToInternet:
