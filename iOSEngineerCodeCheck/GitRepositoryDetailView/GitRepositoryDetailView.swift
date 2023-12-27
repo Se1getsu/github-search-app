@@ -14,7 +14,7 @@ final class GitRepositoryDetailView: UIView {
     // MARK: UI
     let backgroundView: UIView = {
         let myView = UIView()
-        myView.backgroundColor = .systemPurple.withAlphaComponent(0.1)
+        myView.backgroundColor = AppColor.background
         return myView
     }()
     

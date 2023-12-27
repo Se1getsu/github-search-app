@@ -14,12 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Navigation bar customize
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.backgroundColor = .systemPurple.withAlphaComponent(0.4)
+        navigationBarAppearance.backgroundColor = AppColor.navigationBar
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.label]
-        UINavigationBar.appearance().tintColor = .systemPurple
+        UINavigationBar.appearance().tintColor = AppColor.base
         return true
     }
 
