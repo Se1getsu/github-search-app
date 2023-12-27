@@ -10,6 +10,7 @@ import Foundation
 
 /// UITestのために設定する accessibilityIdentifier をまとめたもの。
 enum GitRepositoryDetailViewElementID {
+    static let browseBarButton = "Git Repository Browse Bar Button"
     static let imageView = "Git Repository Image View"
     static let titleLabel = "Git Repository Title Label"
     static let languageLabel = "Git Repository Language Label"
