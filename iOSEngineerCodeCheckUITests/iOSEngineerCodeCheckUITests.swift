@@ -58,6 +58,10 @@ class iOSEngineerCodeCheckUITests: XCTestCase {
             XCTAssertTrue(label.exists)
             XCTAssertTrue(label.isHittable)
         }
+        
+        let browseButton = app.buttons["Git Repository Browse Bar Button"].firstMatch
+        XCTAssertTrue(browseButton.exists)
+        XCTAssertTrue(browseButton.isHittable)
     }
 
     func testLaunchPerformance() throws {
