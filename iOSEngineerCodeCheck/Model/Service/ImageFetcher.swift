@@ -19,7 +19,7 @@ struct ImageFetcher {
             return UIImage(data: data)
             
         case .failure(let error):
-            throw error
+            throw NetworkError.classify(error)
         }
     }
 }
