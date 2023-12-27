@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// API通信時に発生したエラー全般。
 enum APIError: LocalizedError {
     case notConnectedToInternet
     case unknownError(Error)
