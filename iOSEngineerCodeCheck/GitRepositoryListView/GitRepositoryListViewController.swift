@@ -9,17 +9,21 @@
 import UIKit
 
 class GitRepositoryListViewController: UIViewController {
+    private typealias ElementID = GitRepositoryListViewElementID
+    
     // MARK: UI
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "GitHubのリポジトリを検索"
         searchBar.showsCancelButton = false
+        searchBar.accessibilityIdentifier = ElementID.searchBar
         return searchBar
     }()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.accessibilityIdentifier = ElementID.tableView
         return tableView
     }()
     
@@ -42,6 +46,7 @@ class GitRepositoryListViewController: UIViewController {
         label.textColor = .secondaryLabel
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .subheadline)
+        label.accessibilityIdentifier = ElementID.guidanceLabel
         return label
     }()
     

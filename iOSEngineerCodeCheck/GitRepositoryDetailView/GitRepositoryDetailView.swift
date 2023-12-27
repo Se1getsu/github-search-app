@@ -9,10 +9,13 @@
 import UIKit
 
 final class GitRepositoryDetailView: UIView {
+    private typealias ElementID = GitRepositoryDetailViewElementID
+    
     // MARK: UI
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.accessibilityIdentifier = ElementID.imageView
         return imageView
     }()
     
@@ -30,6 +33,7 @@ final class GitRepositoryDetailView: UIView {
         label.textColor = .label
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .title1)
+        label.accessibilityIdentifier = ElementID.titleLabel
         return label
     }()
     
@@ -37,6 +41,7 @@ final class GitRepositoryDetailView: UIView {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
+        label.accessibilityIdentifier = ElementID.languageLabel
         return label
     }()
     
@@ -44,6 +49,7 @@ final class GitRepositoryDetailView: UIView {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
+        label.accessibilityIdentifier = ElementID.starsLabel
         return label
     }()
     
@@ -51,6 +57,7 @@ final class GitRepositoryDetailView: UIView {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
+        label.accessibilityIdentifier = ElementID.watchesLabel
         return label
     }()
     
@@ -58,6 +65,7 @@ final class GitRepositoryDetailView: UIView {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
+        label.accessibilityIdentifier = ElementID.forksLabel
         return label
     }()
     
@@ -65,6 +73,7 @@ final class GitRepositoryDetailView: UIView {
         let label = UILabel()
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
+        label.accessibilityIdentifier = ElementID.issuesLabel
         return label
     }()
     
