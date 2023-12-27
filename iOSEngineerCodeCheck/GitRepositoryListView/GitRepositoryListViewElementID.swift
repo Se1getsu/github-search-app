@@ -11,7 +11,5 @@ import Foundation
 enum GitRepositoryListViewElementID {
     static let searchBar = "Git Repository Search Bar"
     static let tableView = "Git Repository List Table"
-    static let activityIndicatorView = "Git Repository Search Activity Indicator View"
-    static let noResultView = "No Result View"
     static let guidanceLabel = "Search Guidance Label"
 }

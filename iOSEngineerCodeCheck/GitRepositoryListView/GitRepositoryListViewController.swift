@@ -30,14 +30,12 @@ class GitRepositoryListViewController: UIViewController {
     private let activityIndicatorView: UIActivityIndicatorView = {
         let activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.style = .large
-        activityIndicatorView.accessibilityIdentifier = ElementID.activityIndicatorView
         return activityIndicatorView
     }()
     
     private let noResultView: NoResultView = {
         let noResultView = NoResultView()
         noResultView.isHidden = true
-        noResultView.accessibilityIdentifier = ElementID.noResultView
         return noResultView
     }()
     
