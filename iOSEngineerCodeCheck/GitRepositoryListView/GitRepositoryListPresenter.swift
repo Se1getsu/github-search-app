@@ -27,7 +27,7 @@ final class GitRepositoryListPresenter {
     }
     
     private func displayErrorAlert(error: Error) async {
-        if let error = error as? APIError {
+        if let error = error as? NetworkError {
             await MainActor.run {
                 view.showRetryOrCancelAlert(
                     title: error.localizedDescription,

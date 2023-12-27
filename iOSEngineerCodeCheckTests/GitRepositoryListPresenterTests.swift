@@ -61,7 +61,7 @@ final class GitRepositoryListPresenterTests: XCTestCase {
     
     func test_検索_APIエラー() {
         let searchText = "sample"
-        let error = APIError.notConnectedToInternet
+        let error = NetworkError.notConnectedToInternet
         gitRepositorySearcher.result = .failure(error)
         gitRepositorySearcher.returningInterval = 0.05
         presenter.searchBarSearchButtonClicked(searchText: searchText)
@@ -123,7 +123,7 @@ final class GitRepositoryListPresenterTests: XCTestCase {
     
     func test_アラート_再試行() {
         let searchText = "sample"
-        let error = APIError.notConnectedToInternet
+        let error = NetworkError.notConnectedToInternet
         gitRepositorySearcher.result = .failure(error)
         gitRepositorySearcher.returningInterval = 0.0
         presenter.searchBarSearchButtonClicked(searchText: searchText)
@@ -148,7 +148,7 @@ final class GitRepositoryListPresenterTests: XCTestCase {
     
     func test_アラート_キャンセル() {
         let searchText = "sample"
-        let error = APIError.notConnectedToInternet
+        let error = NetworkError.notConnectedToInternet
         gitRepositorySearcher.result = .failure(error)
         gitRepositorySearcher.returningInterval = 0.0
         presenter.searchBarSearchButtonClicked(searchText: searchText)

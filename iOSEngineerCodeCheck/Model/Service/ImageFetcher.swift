@@ -11,7 +11,6 @@ import UIKit.UIImage
 
 /// 画像のフェッチを行う。
 struct ImageFetcher {
-    /// 画像をフェッチする。
     func fetchImage(from url: URL) async throws -> UIImage? {
         let response = await AF.request(url).serializingData().response
         
@@ -20,7 +19,7 @@ struct ImageFetcher {
             return UIImage(data: data)
             
         case .failure(let error):
-            throw error
+            throw NetworkError.classify(error)
         }
     }
 }

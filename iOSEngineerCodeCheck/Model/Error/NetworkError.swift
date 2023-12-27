@@ -1,5 +1,5 @@
 //
-//  APIError.swift
+//  NetworkError.swift
 //  iOSEngineerCodeCheck
 //  
 //  Created by Seigetsu on 2023/12/25
@@ -8,11 +8,12 @@
 
 import Foundation
 
-enum APIError: LocalizedError {
+/// 通信処理で発生するエラー。
+enum NetworkError: LocalizedError {
     case notConnectedToInternet
     case unknownError(Error)
     
-    /// アラートのタイトルとして表示する文字列
+    /// アラートのタイトルとして表示する文字列。
     var localizedDescription: String {
         switch self {
         case .notConnectedToInternet:
@@ -22,7 +23,7 @@ enum APIError: LocalizedError {
         }
     }
     
-    /// アラートのメッセージとして表示する文字列
+    /// アラートのメッセージとして表示する文字列。
     var recoverySuggestion: String? {
         switch self {
         case .notConnectedToInternet:
