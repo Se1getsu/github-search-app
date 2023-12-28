@@ -14,4 +14,14 @@ enum GitRepositorySortOption: String {
     case stars = "stars"
     case forks = "forks"
     case updated = "updated"
+    
+    /// 選択肢としてユーザーに表示する文字列。
+    var description: String {
+        switch self {
+        case .bestMatch:    "関連性の高い順"
+        case .stars:        "スターの多い順"
+        case .forks:        "フォークの多い順"
+        case .updated:      "更新が新しい順"
+        }
+    }
 }

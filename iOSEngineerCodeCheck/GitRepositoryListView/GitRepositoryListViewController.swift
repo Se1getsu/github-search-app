@@ -114,8 +114,13 @@ class GitRepositoryListViewController: UIViewController {
         navigationItem.rightBarButtonItem = searchSettingBarButton
     }
     
-    @objc func searchSettingBarButtonTapped(_ barButton: UIBarButtonItem) {
-        // TODO: 検索設定のポップオーバーを出す
+    @objc func searchSettingBarButtonTapped(_ sender: UIBarButtonItem) {
+        let vc = SearchSettingPopoverViewController()
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.sourceItem = sender
+        vc.popoverPresentationController?.permittedArrowDirections = .up
+        vc.popoverPresentationController?.delegate = self
+        present(vc, animated: true)
     }
 }
 
@@ -169,6 +174,13 @@ extension GitRepositoryListViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         presenter.searchBarCancelButtonClicked()
+    }
+}
+
+extension GitRepositoryListViewController: UIPopoverPresentationControllerDelegate {
+    // iPhoneでPopoverを表示するために必要
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
 }
 
