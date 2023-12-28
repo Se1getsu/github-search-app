@@ -93,18 +93,18 @@ class GitRepositoryListViewController: UIViewController {
         
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            activityIndicatorView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            activityIndicatorView.topAnchor.constraint(equalTo: tableView.topAnchor),
+            activityIndicatorView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
+            activityIndicatorView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
+            activityIndicatorView.bottomAnchor.constraint(equalTo: tableView.bottomAnchor)
         ])
         
         noResultView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            noResultView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            noResultView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            noResultView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            noResultView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            noResultView.topAnchor.constraint(equalTo: tableView.topAnchor),
+            noResultView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
+            noResultView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
+            noResultView.bottomAnchor.constraint(equalTo: tableView.bottomAnchor)
         ])
         
         guidanceLabel.translatesAutoresizingMaskIntoConstraints = false
