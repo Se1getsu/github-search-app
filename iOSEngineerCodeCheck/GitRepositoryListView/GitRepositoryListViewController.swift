@@ -120,6 +120,7 @@ class GitRepositoryListViewController: UIViewController {
         vc.popoverPresentationController?.sourceItem = sender
         vc.popoverPresentationController?.permittedArrowDirections = .up
         vc.popoverPresentationController?.delegate = self
+        vc.delegate = self
         present(vc, animated: true)
     }
 }
@@ -181,6 +182,16 @@ extension GitRepositoryListViewController: UIPopoverPresentationControllerDelega
     // iPhoneでPopoverを表示するために必要
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
+    }
+}
+
+extension GitRepositoryListViewController: SearchSettingPopoverViewDelegate {
+    var currentSortOption: GitRepositorySortOption {
+        presenter.sortOption
+    }
+    
+    func didSelectSortOption(_ sortOption: GitRepositorySortOption) {
+        presenter.didSelectSortOption(sortOption)
     }
 }
 
