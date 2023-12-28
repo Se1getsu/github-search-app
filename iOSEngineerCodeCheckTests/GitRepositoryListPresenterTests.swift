@@ -54,7 +54,7 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         XCTAssertFalse(view.showingGuidance)
         XCTAssertTrue(view.activityIndicatorAnimating)
         
-        _ = XCTWaiter.wait(for: [expectation(description: "読み込みが完了するまで待機")], timeout: 0.15)
+        _ = XCTWaiter.wait(for: [expectation(description: "読み込みが完了するまで待機")], timeout: 0.1)
         XCTAssertEqual(view.gitRepositories?.count, 3)
         XCTAssertFalse(view.activityIndicatorAnimating)
     }
