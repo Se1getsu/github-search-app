@@ -28,6 +28,24 @@ class iOSEngineerCodeCheckUITests: XCTestCase {
         XCTAssertTrue(searchBar.exists)
         XCTAssertTrue(searchBar.isHittable)
         
+        let searchSettingBarButton = app.buttons["Git Repository Search Setting Bar Button"].firstMatch
+        XCTAssertTrue(searchSettingBarButton.exists)
+        XCTAssertTrue(searchSettingBarButton.isHittable)
+        
+        // MARK: 検索設定ボタンを押す
+        searchSettingBarButton.tap()
+        
+        let settingTableView = app.tables["Search Setting Table"].firstMatch
+        XCTAssertTrue(settingTableView.exists)
+        XCTAssertTrue(settingTableView.isHittable)
+        XCTAssertEqual(settingTableView.cells.count, 4)
+        
+        // MARK: 上から2番目の選択肢をタップ
+        settingTableView.cells.element(boundBy: 1).tap()
+        
+        // MARK: 検索設定画面を閉じる
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.5)).tap()
+        
         // MARK: 「swift」を検索
         searchBar.tap()
         searchBar.typeText("swift\n")
