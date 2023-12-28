@@ -49,12 +49,12 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         presenter.searchBarSearchButtonClicked(searchText: searchText)
         
         _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
-        XCTAssertEqual(gitRepositorySearcher.query, searchText)
+        XCTAssertEqual(gitRepositorySearcher.query?.query, searchText)
         XCTAssertTrue(view.searchBarEndEditingCalled)
         XCTAssertFalse(view.showingGuidance)
         XCTAssertTrue(view.activityIndicatorAnimating)
         
-        _ = XCTWaiter.wait(for: [expectation(description: "読み込みが完了するまで待機")], timeout: 0.15)
+        _ = XCTWaiter.wait(for: [expectation(description: "読み込みが完了するまで待機")], timeout: 0.1)
         XCTAssertEqual(view.gitRepositories?.count, 3)
         XCTAssertFalse(view.activityIndicatorAnimating)
     }
@@ -138,7 +138,7 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         presenter.alertRetrySelected()
         
         _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
-        XCTAssertEqual(gitRepositorySearcher.query, searchText)
+        XCTAssertEqual(gitRepositorySearcher.query?.query, searchText)
         XCTAssertTrue(view.activityIndicatorAnimating)
         
         _ = XCTWaiter.wait(for: [expectation(description: "読み込みが完了するまで待機")], timeout: 0.1)
@@ -161,5 +161,10 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         
         _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
         XCTAssertFalse(view.activityIndicatorAnimating)
+    }
+    
+    func test_ソートオプション選択() {
+        presenter.didSelectSortOption(.forks)
+        XCTAssertEqual(presenter.sortOption, .forks)
     }
 }
