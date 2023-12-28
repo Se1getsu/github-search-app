@@ -13,6 +13,7 @@
 		A621C6CF2B3CFDAD00F0E060 /* SearchSettingPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A621C6CE2B3CFDAD00F0E060 /* SearchSettingPopoverViewController.swift */; };
 		A621C6D12B3CFDC800F0E060 /* SearchSettingPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A621C6D02B3CFDC800F0E060 /* SearchSettingPopoverView.swift */; };
 		A621C6D32B3CFEF600F0E060 /* SearchSettingPopoverViewElementID.swift in Sources */ = {isa = PBXBuildFile; fileRef = A621C6D22B3CFEF600F0E060 /* SearchSettingPopoverViewElementID.swift */; };
+		A621C6D52B3D162600F0E060 /* SearchSettingPopoverViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A621C6D42B3D162600F0E060 /* SearchSettingPopoverViewDelegate.swift */; };
 		A632347E2B3B14A7000C89C2 /* GitRepositoryDetailViewElementID.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632347D2B3B14A7000C89C2 /* GitRepositoryDetailViewElementID.swift */; };
 		A64CCFA62B3B24E500C19CA6 /* GitRepositoryListViewElementID.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691B1222B3B0F6E0002F405 /* GitRepositoryListViewElementID.swift */; };
 		A6519E922B382FC100335D24 /* GitRepositoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6519E912B382FC100335D24 /* GitRepositoryListPresenter.swift */; };
@@ -66,6 +67,7 @@
 		A621C6CE2B3CFDAD00F0E060 /* SearchSettingPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingPopoverViewController.swift; sourceTree = "<group>"; };
 		A621C6D02B3CFDC800F0E060 /* SearchSettingPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingPopoverView.swift; sourceTree = "<group>"; };
 		A621C6D22B3CFEF600F0E060 /* SearchSettingPopoverViewElementID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingPopoverViewElementID.swift; sourceTree = "<group>"; };
+		A621C6D42B3D162600F0E060 /* SearchSettingPopoverViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingPopoverViewDelegate.swift; sourceTree = "<group>"; };
 		A632347D2B3B14A7000C89C2 /* GitRepositoryDetailViewElementID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryDetailViewElementID.swift; sourceTree = "<group>"; };
 		A6519E912B382FC100335D24 /* GitRepositoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryListPresenter.swift; sourceTree = "<group>"; };
 		A6519E932B38300700335D24 /* GitRepositoryListPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRepositoryListPresenterInput.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				A621C6CE2B3CFDAD00F0E060 /* SearchSettingPopoverViewController.swift */,
 				A621C6D02B3CFDC800F0E060 /* SearchSettingPopoverView.swift */,
+				A621C6D42B3D162600F0E060 /* SearchSettingPopoverViewDelegate.swift */,
 				A621C6D22B3CFEF600F0E060 /* SearchSettingPopoverViewElementID.swift */,
 			);
 			path = SearchSettingPopoverView;
@@ -447,6 +450,7 @@
 			files = (
 				BFD945E3244DC5E80012785A /* GitRepositoryListViewController.swift in Sources */,
 				A621C6C92B3C622D00F0E060 /* GitRepositorySortOption.swift in Sources */,
+				A621C6D52B3D162600F0E060 /* SearchSettingPopoverViewDelegate.swift in Sources */,
 				A69765212B37C6C2001B8136 /* GitRepository.swift in Sources */,
 				A621C6D32B3CFEF600F0E060 /* SearchSettingPopoverViewElementID.swift in Sources */,
 				A621C6D12B3CFDC800F0E060 /* SearchSettingPopoverView.swift in Sources */,
