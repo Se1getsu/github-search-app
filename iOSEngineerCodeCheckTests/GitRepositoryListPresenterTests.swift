@@ -162,4 +162,9 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
         XCTAssertFalse(view.activityIndicatorAnimating)
     }
+    
+    func test_ソートオプション選択() {
+        presenter.didSelectSortOption(.forks)
+        XCTAssertEqual(presenter.sortOption, .forks)
+    }
 }
