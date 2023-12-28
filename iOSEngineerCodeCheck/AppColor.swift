@@ -10,8 +10,23 @@ import UIKit
 
 /// アプリのUIに使用する UIColor をまとめたもの。
 enum AppColor {
+    // MARK: ベースの色
     static let base = UIColor.systemPurple
-    static let background = base.withAlphaComponent(0.1)
+    
+    // MARK: ナビゲーションバー
     static let navigationBar = base.withAlphaComponent(0.4)
+    static let navigationBarTitle = UIColor.label
+    
+    // MARK: 背景
+    static let background = base.withAlphaComponent(0.1)
+    
+    // MARK: ラベル
+    static let label = UIColor.label
+    static let secondaryLabel = UIColor.secondaryLabel
+    
+    // MARK: サーチバー
     static let searchBarBarTint = UIColor.systemGray6
+    
+    // MARK: アイコン
+    static let secondarySystemIcon = UIColor.systemGray
 }
