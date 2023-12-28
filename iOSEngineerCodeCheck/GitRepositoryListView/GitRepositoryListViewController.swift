@@ -69,18 +69,16 @@ class GitRepositoryListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setUpNavigationBar()
         
-        activityIndicatorView.center = view.center
-        noResultView.center = view.center
-        
         view.addSubview(searchBar)
         view.addSubview(tableView)
         view.addSubview(activityIndicatorView)
         view.addSubview(noResultView)
         view.addSubview(guidanceLabel)
         
+        let safeArea = view.safeAreaLayoutGuide
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: safeArea.topAnchor),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -91,6 +89,22 @@ class GitRepositoryListViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicatorView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        noResultView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            noResultView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            noResultView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            noResultView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            noResultView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         guidanceLabel.translatesAutoresizingMaskIntoConstraints = false
