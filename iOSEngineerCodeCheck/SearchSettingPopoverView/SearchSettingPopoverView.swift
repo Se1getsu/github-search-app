@@ -15,7 +15,7 @@ final class SearchSettingPopoverView: UIView {
     let sortOrderLabel: UILabel = {
         let label = UILabel()
         label.text = "並び順"
-        label.textColor = .label
+        label.textColor = AppColor.label
         label.textAlignment = .left
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label

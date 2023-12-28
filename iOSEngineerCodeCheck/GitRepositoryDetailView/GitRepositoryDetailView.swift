@@ -36,7 +36,7 @@ final class GitRepositoryDetailView: UIView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = AppColor.label
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .title1)
         label.accessibilityIdentifier = ElementID.titleLabel
@@ -45,7 +45,7 @@ final class GitRepositoryDetailView: UIView {
     
     let languageLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = AppColor.label
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.accessibilityIdentifier = ElementID.languageLabel
         return label
@@ -53,7 +53,7 @@ final class GitRepositoryDetailView: UIView {
     
     let starsLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = AppColor.label
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.accessibilityIdentifier = ElementID.starsLabel
         return label
@@ -61,7 +61,7 @@ final class GitRepositoryDetailView: UIView {
     
     let watchesLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = AppColor.label
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.accessibilityIdentifier = ElementID.watchesLabel
         return label
@@ -69,7 +69,7 @@ final class GitRepositoryDetailView: UIView {
     
     let forksLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = AppColor.label
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.accessibilityIdentifier = ElementID.forksLabel
         return label
@@ -77,7 +77,7 @@ final class GitRepositoryDetailView: UIView {
     
     let issuesLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = AppColor.label
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.accessibilityIdentifier = ElementID.issuesLabel
         return label

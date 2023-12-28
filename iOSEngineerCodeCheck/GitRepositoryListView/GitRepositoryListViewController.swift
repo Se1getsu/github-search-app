@@ -48,7 +48,7 @@ class GitRepositoryListViewController: UIViewController {
         let label = UILabel()
         label.text = "上の検索バーにキーワードを入力して\nGitHubのリポジトリを検索します。"
         label.numberOfLines = 2
-        label.textColor = .secondaryLabel
+        label.textColor = AppColor.secondaryLabel
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.accessibilityIdentifier = ElementID.guidanceLabel

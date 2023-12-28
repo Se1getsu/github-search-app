@@ -12,14 +12,14 @@ final class NoResultView: UIView {
     // MARK: UI
     private let imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "magnifyingglass"))
-        imageView.tintColor = .systemGray
+        imageView.tintColor = AppColor.secondarySystemIcon
         return imageView
     }()
     
     private let label: UILabel = {
         let label = UILabel()
         label.text = "検索結果なし"
-        label.textColor = .label
+        label.textColor = AppColor.label
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .subheadline)
         return label
