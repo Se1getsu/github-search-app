@@ -16,6 +16,7 @@ final class GitRepositoryListPresenter {
     
     // MARK: 状態
     private(set) var gitRepositories: [GitRepository] = []
+    private(set) var sortOption: GitRepositorySortOption = .bestMatch
     private var searchingTask: Task<(), Never>?
     private var textWillSearch: String?
     private var textDidSearch: String?
@@ -75,6 +76,10 @@ final class GitRepositoryListPresenter {
 }
 
 extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
+    func didSelectSortOption(_ sortOption: GitRepositorySortOption) {
+        self.sortOption = sortOption
+    }
+    
     func searchBar(textDidChange searchText: String) {
         searchingTask?.cancel()
     }
