@@ -35,6 +35,7 @@ class GitRepositoryDetailViewController: UIViewController {
         view = myView
         SetUpNavigationBar()
         
+        myView.titleLabel.text = gitRepository.fullName
         myView.languageLabel.text = {
             if let language = gitRepository.language {
                 "Written in \(language)"
@@ -73,7 +74,6 @@ class GitRepositoryDetailViewController: UIViewController {
     }
     
     private func fetchAndShowImage() {
-        myView.titleLabel.text = gitRepository.fullName
         guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else { return }
         Task {
             guard let image = try? await imageFetcher.fetchImage(from: url) else { return }
