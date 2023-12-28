@@ -111,6 +111,7 @@ class GitRepositoryListViewController: UIViewController {
             target: self,
             action: #selector(searchSettingBarButtonTapped(_:))
         )
+        searchSettingBarButton.accessibilityIdentifier = ElementID.searchSettingBarButton
         navigationItem.rightBarButtonItem = searchSettingBarButton
     }
     
