@@ -12,6 +12,8 @@ class GitRepositoryListViewController: UIViewController {
     private typealias ElementID = GitRepositoryListViewElementID
     
     // MARK: UI
+    private var searchSettingBarButton: UIBarButtonItem!
+    
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "GitHubのリポジトリを検索"
@@ -65,6 +67,7 @@ class GitRepositoryListViewController: UIViewController {
         super.viewDidLoad()
         title = "リポジトリ検索"
         view.backgroundColor = .systemBackground
+        setUpNavigationBar()
         
         activityIndicatorView.center = view.center
         noResultView.center = view.center
@@ -99,6 +102,26 @@ class GitRepositoryListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
+    }
+    
+    private func setUpNavigationBar() {
+        searchSettingBarButton = UIBarButtonItem(
+            image: UIImage(systemName: "slider.horizontal.3"),
+            style: .plain,
+            target: self,
+            action: #selector(searchSettingBarButtonTapped(_:))
+        )
+        navigationItem.rightBarButtonItem = searchSettingBarButton
+    }
+    
+    @objc func searchSettingBarButtonTapped(_ sender: UIBarButtonItem) {
+        let vc = SearchSettingPopoverViewController()
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.sourceItem = sender
+        vc.popoverPresentationController?.permittedArrowDirections = .up
+        vc.popoverPresentationController?.delegate = self
+        vc.delegate = self
+        present(vc, animated: true)
     }
 }
 
@@ -152,6 +175,23 @@ extension GitRepositoryListViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         presenter.searchBarCancelButtonClicked()
+    }
+}
+
+extension GitRepositoryListViewController: UIPopoverPresentationControllerDelegate {
+    // iPhoneでPopoverを表示するために必要
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+}
+
+extension GitRepositoryListViewController: SearchSettingPopoverViewDelegate {
+    var currentSortOption: GitRepositorySortOption {
+        presenter.sortOption
+    }
+    
+    func didSelectSortOption(_ sortOption: GitRepositorySortOption) {
+        presenter.didSelectSortOption(sortOption)
     }
 }
 

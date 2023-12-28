@@ -12,6 +12,12 @@ protocol GitRepositoryListPresenterInput {
     /// 画面に表示するための Git リポジトリの配列。
     var gitRepositories: [GitRepository] { get }
     
+    /// 選択されているソートオプション。
+    var sortOption: GitRepositorySortOption { get }
+    
+    /// ソートオプションが選択された時の処理。
+    func didSelectSortOption(_ sortOption: GitRepositorySortOption)
+    
     /// サーチバーのテキストに変更が加えられた時の処理。
     func searchBar(textDidChange searchText: String)
     

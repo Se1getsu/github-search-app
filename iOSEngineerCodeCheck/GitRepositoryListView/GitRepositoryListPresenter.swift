@@ -16,6 +16,7 @@ final class GitRepositoryListPresenter {
     
     // MARK: 状態
     private(set) var gitRepositories: [GitRepository] = []
+    private(set) var sortOption: GitRepositorySortOption = .bestMatch
     private var searchingTask: Task<(), Never>?
     private var textWillSearch: String?
     private var textDidSearch: String?
@@ -53,6 +54,21 @@ final class GitRepositoryListPresenter {
         }
     }
     
+    /// Git リポジトリ検索処理。
+    private func search(searchText: String) {
+        searchingTask = Task {
+            do {
+                await willSearch(searchText: searchText)
+                let query = GitRepositorySearchQuery(query: searchText, sortOption: sortOption)
+                let gitRepositories = try await gitRepositorySearcher.search(query: query).items
+                await didSearch(searchText: searchText, result: gitRepositories)
+            } catch {
+                guard !Task.isCancelled else { return }
+                await displayErrorAlert(error: error)
+            }
+        }
+    }
+    
     /// 検索開始時に行う処理。
     private func willSearch(searchText: String) async {
         await MainActor.run {
@@ -75,27 +91,26 @@ final class GitRepositoryListPresenter {
 }
 
 extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
+    func didSelectSortOption(_ sortOption: GitRepositorySortOption) {
+        self.sortOption = sortOption
+        searchingTask?.cancel()
+        if let textWillSearch {
+            search(searchText: textWillSearch)
+        }
+    }
+    
     func searchBar(textDidChange searchText: String) {
         searchingTask?.cancel()
+        Task {
+            await MainActor.run {
+                view.stopActivityIndicator()
+            }
+        }
     }
     
     func searchBarSearchButtonClicked(searchText: String) {
         guard !searchText.isEmpty else { return }
-        searchingTask = Task {
-            do {
-                await willSearch(searchText: searchText)
-                let gitRepositories = try await gitRepositorySearcher.search(query: searchText).items
-                await didSearch(searchText: searchText, result: gitRepositories)
-            } catch {
-                if Task.isCancelled {
-                    await MainActor.run {
-                        view.stopActivityIndicator()
-                    }
-                } else {
-                    await displayErrorAlert(error: error)
-                }
-            }
-        }
+        search(searchText: searchText)
     }
     
     func searchBarCancelButtonClicked() {

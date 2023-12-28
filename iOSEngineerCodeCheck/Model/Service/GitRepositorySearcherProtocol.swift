@@ -11,6 +11,5 @@ import Foundation
 /// Git リポジトリの検索を行う。
 protocol GitRepositorySearcherProtocol {
     /// Git リポジトリの検索を行う。
-    /// - parameter query: 1つ以上の検索キーワードと修飾子を含むクエリ。
-    func search(query: String) async throws -> GitRepositorySearchResult
+    func search(query: GitRepositorySearchQuery) async throws -> GitRepositorySearchResult
 }
