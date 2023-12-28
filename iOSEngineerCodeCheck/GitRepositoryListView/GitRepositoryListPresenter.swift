@@ -89,7 +89,7 @@ extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
         searchingTask = Task {
             do {
                 await willSearch(searchText: searchText)
-                let query = GitRepositorySearchQuery(query: searchText, sortOption: .bestMatch)
+                let query = GitRepositorySearchQuery(query: searchText, sortOption: sortOption)
                 let gitRepositories = try await gitRepositorySearcher.search(query: query).items
                 await didSearch(searchText: searchText, result: gitRepositories)
             } catch {
