@@ -49,7 +49,7 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         presenter.searchBarSearchButtonClicked(searchText: searchText)
         
         _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
-        XCTAssertEqual(gitRepositorySearcher.query, searchText)
+        XCTAssertEqual(gitRepositorySearcher.query?.query, searchText)
         XCTAssertTrue(view.searchBarEndEditingCalled)
         XCTAssertFalse(view.showingGuidance)
         XCTAssertTrue(view.activityIndicatorAnimating)
@@ -138,7 +138,7 @@ final class GitRepositoryListPresenterTests: XCTestCase {
         presenter.alertRetrySelected()
         
         _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
-        XCTAssertEqual(gitRepositorySearcher.query, searchText)
+        XCTAssertEqual(gitRepositorySearcher.query?.query, searchText)
         XCTAssertTrue(view.activityIndicatorAnimating)
         
         _ = XCTWaiter.wait(for: [expectation(description: "読み込みが完了するまで待機")], timeout: 0.1)

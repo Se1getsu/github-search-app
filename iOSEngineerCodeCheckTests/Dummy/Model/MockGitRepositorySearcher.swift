@@ -14,7 +14,7 @@ class MockGitRepositorySearcher: GitRepositorySearcherProtocol {
     private(set) var searchCalledCount = 0
     
     // MARK: Received Argument
-    private(set) var query: String?
+    private(set) var query: GitRepositorySearchQuery?
     
     // MARK: Will Return
     var result: Result<GitRepositorySearchResult, Error>
@@ -32,7 +32,7 @@ class MockGitRepositorySearcher: GitRepositorySearcherProtocol {
         query = nil
     }
     
-    func search(query: String) async throws -> GitRepositorySearchResult {
+    func search(query: GitRepositorySearchQuery) async throws -> GitRepositorySearchResult {
         searchCalledCount += 1
         self.query = query
         try await Task.sleep(nanoseconds: UInt64(returningInterval * 1_000_000_000))
