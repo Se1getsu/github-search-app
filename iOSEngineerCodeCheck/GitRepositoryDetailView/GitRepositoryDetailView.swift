@@ -137,7 +137,7 @@ final class GitRepositoryDetailView: UIView {
         languageLabel.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         commonConstraints = [
-            imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
+            imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
             imageView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0),
             imageView.widthAnchor.constraint(lessThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.9),
