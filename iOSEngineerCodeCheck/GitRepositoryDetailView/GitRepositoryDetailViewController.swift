@@ -74,9 +74,21 @@ class GitRepositoryDetailViewController: UIViewController {
     }
     
     private func fetchAndShowImage() {
-        guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else { return }
+        guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else {
+            Task {
+                await MainActor.run {
+                    myView.imagePlaceholerLabel.text = "No Image"
+                }
+            }
+            return
+        }
         Task {
-            guard let image = try? await imageFetcher.fetchImage(from: url) else { return }
+            guard let image = try? await imageFetcher.fetchImage(from: url) else {
+                await MainActor.run {
+                    myView.imagePlaceholerLabel.text = "画像の取得に失敗しました。"
+                }
+                return
+            }
             await MainActor.run {
                 myView.imageView.image = image
             }
