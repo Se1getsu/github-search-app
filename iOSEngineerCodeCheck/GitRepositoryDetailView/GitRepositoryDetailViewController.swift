@@ -47,7 +47,7 @@ class GitRepositoryDetailViewController: UIViewController {
         myView.watchesLabel.text = "\(gitRepository.watchersCount) watchers"
         myView.forksLabel.text = "\(gitRepository.forksCount) forks"
         myView.issuesLabel.text = "\(gitRepository.openIssuesCount) open issues"
-        fetchAndShowImage()
+        setUpImageView()
     }
     
     private func SetUpNavigationBar() {
@@ -73,7 +73,7 @@ class GitRepositoryDetailViewController: UIViewController {
         browse()
     }
     
-    private func fetchAndShowImage() {
+    private func setUpImageView() {
         Task {
             guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else {
                 await setImagePlaceholder(text: "No Image")
