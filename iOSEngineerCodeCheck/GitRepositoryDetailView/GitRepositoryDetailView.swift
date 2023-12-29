@@ -18,6 +18,14 @@ final class GitRepositoryDetailView: UIView {
         return myView
     }()
     
+    let imagePlaceholerLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppColor.secondaryLabel
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        return label
+    }()
+    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -100,6 +108,7 @@ final class GitRepositoryDetailView: UIView {
         backgroundColor = AppColor.baseBackGround
         
         addSubview(backgroundView)
+        addSubview(imagePlaceholerLabel)
         addSubview(imageView)
         addSubview(titleScrollView)
         titleScrollView.addSubview(titleLabel)
@@ -118,6 +127,14 @@ final class GitRepositoryDetailView: UIView {
             backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        ])
+        
+        imagePlaceholerLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imagePlaceholerLabel.topAnchor.constraint(equalTo: imageView.topAnchor),
+            imagePlaceholerLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            imagePlaceholerLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            imagePlaceholerLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor)
         ])
         
         let titleScrollContent = titleScrollView.contentLayoutGuide
