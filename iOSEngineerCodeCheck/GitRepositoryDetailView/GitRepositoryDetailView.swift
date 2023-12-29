@@ -97,7 +97,7 @@ final class GitRepositoryDetailView: UIView {
     // MARK: メソッド
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = AppColor.baseBackGround
         
         addSubview(backgroundView)
         addSubview(imageView)

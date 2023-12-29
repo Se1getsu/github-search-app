@@ -66,7 +66,7 @@ class GitRepositoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "リポジトリ検索"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = AppColor.baseBackGround
         setUpNavigationBar()
         
         view.addSubview(searchBar)
