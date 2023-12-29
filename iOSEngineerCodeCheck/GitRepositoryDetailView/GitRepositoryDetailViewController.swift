@@ -47,7 +47,7 @@ class GitRepositoryDetailViewController: UIViewController {
         myView.watchesLabel.text = "\(gitRepository.watchersCount) watchers"
         myView.forksLabel.text = "\(gitRepository.forksCount) forks"
         myView.issuesLabel.text = "\(gitRepository.openIssuesCount) open issues"
-        fetchAndShowImage()
+        setUpImageView()
     }
     
     private func SetUpNavigationBar() {
@@ -73,25 +73,31 @@ class GitRepositoryDetailViewController: UIViewController {
         browse()
     }
     
-    private func fetchAndShowImage() {
-        guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else {
-            Task {
-                await MainActor.run {
-                    myView.imagePlaceholerLabel.text = "No Image"
-                }
-            }
-            return
-        }
+    private func setUpImageView() {
         Task {
-            guard let image = try? await imageFetcher.fetchImage(from: url) else {
-                await MainActor.run {
-                    myView.imagePlaceholerLabel.text = "画像の取得に失敗しました。"
-                }
+            guard let owner = gitRepository.owner, let url = URL(string: owner.avatarURL) else {
+                await setImagePlaceholder(text: "No Image")
                 return
             }
-            await MainActor.run {
-                myView.imageView.image = image
+            await setImagePlaceholder(text: "画像を取得中…")
+            guard let image = try? await imageFetcher.fetchImage(from: url) else {
+                await setImagePlaceholder(text: "画像の取得に失敗しました。")
+                return
             }
+            await setImageView(image: image)
+            await setImagePlaceholder(text: "")
+        }
+    }
+    
+    private func setImagePlaceholder(text: String) async {
+        await MainActor.run {
+            myView.imagePlaceholerLabel.text = text
+        }
+    }
+    
+    private func setImageView(image: UIImage) async {
+        await MainActor.run {
+            myView.imageView.image = image
         }
     }
     
