@@ -34,6 +34,13 @@ final class GitRepositoryDetailView: UIView {
         return stackView
     }()
     
+    let titleScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = true
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColor.label
@@ -94,7 +101,8 @@ final class GitRepositoryDetailView: UIView {
         
         addSubview(backgroundView)
         addSubview(imageView)
-        addSubview(titleLabel)
+        addSubview(titleScrollView)
+        titleScrollView.addSubview(titleLabel)
         addSubview(languageLabel)
         addSubview(stackView)
         stackView.addArrangedSubview(starsLabel)
@@ -112,9 +120,20 @@ final class GitRepositoryDetailView: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
+        let titleScrollContent = titleScrollView.contentLayoutGuide
+        let titleScrollFrame = titleScrollView.frameLayoutGuide
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: titleScrollContent.topAnchor),
+            titleLabel.centerXAnchor.constraint(equalTo: titleScrollContent.centerXAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: titleScrollContent.widthAnchor),
+            titleLabel.widthAnchor.constraint(greaterThanOrEqualTo: titleScrollFrame.widthAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: titleScrollContent.bottomAnchor)
+        ])
+        
         // MARK: 縦長のレイアウト
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleScrollView.translatesAutoresizingMaskIntoConstraints = false
         languageLabel.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         commonConstraints = [
@@ -123,9 +142,10 @@ final class GitRepositoryDetailView: UIView {
             imageView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            titleLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            titleScrollView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            titleScrollView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            titleScrollView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            titleScrollView.heightAnchor.constraint(equalToConstant: 42),
             
             languageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             languageLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
@@ -142,10 +162,11 @@ final class GitRepositoryDetailView: UIView {
             imageView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -5),
-
+            titleScrollView.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 10),
+            titleScrollView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
+            titleScrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+            titleScrollView.heightAnchor.constraint(equalToConstant: 42),
+            
             languageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             languageLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
             
