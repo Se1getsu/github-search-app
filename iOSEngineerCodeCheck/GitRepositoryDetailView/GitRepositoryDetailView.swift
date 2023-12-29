@@ -34,6 +34,13 @@ final class GitRepositoryDetailView: UIView {
         return stackView
     }()
     
+    let titleScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = true
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColor.label
@@ -90,11 +97,12 @@ final class GitRepositoryDetailView: UIView {
     // MARK: メソッド
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = AppColor.baseBackGround
         
         addSubview(backgroundView)
         addSubview(imageView)
-        addSubview(titleLabel)
+        addSubview(titleScrollView)
+        titleScrollView.addSubview(titleLabel)
         addSubview(languageLabel)
         addSubview(stackView)
         stackView.addArrangedSubview(starsLabel)
@@ -112,20 +120,37 @@ final class GitRepositoryDetailView: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
+        let titleScrollContent = titleScrollView.contentLayoutGuide
+        let titleScrollFrame = titleScrollView.frameLayoutGuide
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: titleScrollContent.topAnchor),
+            titleLabel.centerXAnchor.constraint(equalTo: titleScrollContent.centerXAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: titleScrollContent.widthAnchor),
+            titleLabel.widthAnchor.constraint(greaterThanOrEqualTo: titleScrollFrame.widthAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: titleScrollContent.bottomAnchor)
+        ])
+        
         // MARK: 縦長のレイアウト
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleScrollView.translatesAutoresizingMaskIntoConstraints = false
         languageLabel.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         commonConstraints = [
-            imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
-            imageView.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.9),
+            imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
             imageView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0),
+            imageView.widthAnchor.constraint(lessThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.9),
+            imageView.widthAnchor.constraint(lessThanOrEqualTo: safeArea.heightAnchor, multiplier: 0.6),
+            imageView.widthAnchor.constraint(greaterThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.9)
+                .withSecondaryPriority(),
+            imageView.widthAnchor.constraint(greaterThanOrEqualTo: safeArea.heightAnchor, multiplier: 0.6)
+                .withSecondaryPriority(),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            titleLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            titleScrollView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            titleScrollView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            titleScrollView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            titleScrollView.heightAnchor.constraint(equalToConstant: 42),
             
             languageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             languageLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
@@ -137,15 +162,21 @@ final class GitRepositoryDetailView: UIView {
         
         // MARK: 横長のレイアウト
         wideConstraints = [
-            imageView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.9),
             imageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
             imageView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0),
+            imageView.heightAnchor.constraint(lessThanOrEqualTo: safeArea.heightAnchor, multiplier: 0.9),
+            imageView.heightAnchor.constraint(lessThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.5),
+            imageView.heightAnchor.constraint(greaterThanOrEqualTo: safeArea.heightAnchor, multiplier: 0.9)
+                .withSecondaryPriority(),
+            imageView.heightAnchor.constraint(greaterThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.5)
+                .withSecondaryPriority(),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -5),
-
+            titleScrollView.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 10),
+            titleScrollView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
+            titleScrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+            titleScrollView.heightAnchor.constraint(equalToConstant: 42),
+            
             languageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             languageLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
             

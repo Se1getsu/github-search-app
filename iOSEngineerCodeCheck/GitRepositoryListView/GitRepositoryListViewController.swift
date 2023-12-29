@@ -66,7 +66,7 @@ class GitRepositoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "リポジトリ検索"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = AppColor.baseBackGround
         setUpNavigationBar()
         
         view.addSubview(searchBar)
@@ -80,7 +80,8 @@ class GitRepositoryListViewController: UIViewController {
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: safeArea.topAnchor),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchBar.heightAnchor.constraint(equalToConstant: 48)
         ])
         
         tableView.translatesAutoresizingMaskIntoConstraints = false

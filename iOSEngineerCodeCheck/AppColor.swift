@@ -14,10 +14,17 @@ enum AppColor {
     static let base = UIColor.systemPurple
     
     // MARK: ナビゲーションバー
-    static let navigationBar = base.withAlphaComponent(0.4)
+    static let navigationBar = base.withAlphaComponent(0.3)
+    static let navigationBarTint = UIColor.dynamic(
+        normal: AppColor.base,
+        highContrast: .systemRed
+    )
     static let navigationBarTitle = UIColor.label
     
     // MARK: 背景
+    /// ナビゲーションバーと被って透けてしまう `UIViewController` の `view.background` に対して設定する背景色。
+    static let baseBackGround = UIColor.systemBackground
+    
     static let background = base.withAlphaComponent(0.1)
     
     // MARK: ラベル
