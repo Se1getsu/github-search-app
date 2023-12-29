@@ -138,9 +138,14 @@ final class GitRepositoryDetailView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         commonConstraints = [
             imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
-            imageView.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.9),
             imageView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0),
+            imageView.widthAnchor.constraint(lessThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.9),
+            imageView.widthAnchor.constraint(lessThanOrEqualTo: safeArea.heightAnchor, multiplier: 0.6),
+            imageView.widthAnchor.constraint(greaterThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.9)
+                .withSecondaryPriority(),
+            imageView.widthAnchor.constraint(greaterThanOrEqualTo: safeArea.heightAnchor, multiplier: 0.6)
+                .withSecondaryPriority(),
             
             titleScrollView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
             titleScrollView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
@@ -157,10 +162,15 @@ final class GitRepositoryDetailView: UIView {
         
         // MARK: 横長のレイアウト
         wideConstraints = [
-            imageView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.9),
             imageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
             imageView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0),
+            imageView.heightAnchor.constraint(lessThanOrEqualTo: safeArea.heightAnchor, multiplier: 0.9),
+            imageView.heightAnchor.constraint(lessThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.5),
+            imageView.heightAnchor.constraint(greaterThanOrEqualTo: safeArea.heightAnchor, multiplier: 0.9)
+                .withSecondaryPriority(),
+            imageView.heightAnchor.constraint(greaterThanOrEqualTo: safeArea.widthAnchor, multiplier: 0.5)
+                .withSecondaryPriority(),
             
             titleScrollView.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 10),
             titleScrollView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
