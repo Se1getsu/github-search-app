@@ -256,6 +256,10 @@ extension GitRepositorySearchViewController: GitRepositorySearchPresenterOutput 
     func hideGuidance() {
         guidanceLabel.isHidden = true
     }
+    
+    func showGuidance() {
+        guidanceLabel.isHidden = false
+    }
 }
 
 #Preview("UIKit") {
