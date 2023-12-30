@@ -43,9 +43,6 @@ class iOSEngineerCodeCheckUITests: XCTestCase {
         // MARK: 上から2番目の選択肢をタップ
         settingTableView.cells.element(boundBy: 1).tap()
         
-        // MARK: 検索設定画面を閉じる
-        app.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.5)).tap()
-        
         // MARK: 「swift」を検索
         searchBar.tap()
         searchBar.typeText("swift\n")

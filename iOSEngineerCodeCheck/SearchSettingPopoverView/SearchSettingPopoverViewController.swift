@@ -52,5 +52,6 @@ extension SearchSettingPopoverViewController: UITableViewDelegate {
         let selectedSortOption = sortOptions[indexPath.row]
         delegate?.didSelectSortOption(selectedSortOption)
         tableView.reloadData()
+        dismiss(animated: true)
     }
 }
