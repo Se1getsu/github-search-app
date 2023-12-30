@@ -117,23 +117,23 @@ HIGに従い、コンテンツの読み込み中には代わりのものを表�
 
 まず、リポジトリの検索時には、アクティビティインジケーターを表示するようにしました。
 
-![画面イメージ](README_Images/ux_activity_indicator.png)
+![画面イメージ](README_Images/ux_activity_indicator.jpeg)
 
 また、画像の読み込み時には、プレースホルダーを表示するようにしました。
 
-![画面イメージ](README_Images/ux_image_loading.png)
+![画面イメージ](README_Images/ux_image_loading.jpeg)
 
 ### 検索結果がない場合の表示
 
 検索結果が 0 件の場合は「検索結果なし」の表示をするようにしました。
 
-![画面イメージ](README_Images/ux_no_result.png)
+![画面イメージ](README_Images/ux_no_result.jpeg)
 
 ### エラー対処
 
 何らかの原因で読み込みに失敗した場合には、ユーザーにその旨を伝えるようにしました。
 
-![画面イメージ](README_Images/ux_no_connection.png)
+![画面イメージ](README_Images/ux_no_connection.jpeg)
 
 想定外のエラーが発生した場合には、NSErrorのエラーコードをアラートとして表示し、開発側が解決に取り組む際に最低限問題を分類しやすくしました。
 
