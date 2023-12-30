@@ -161,6 +161,7 @@ final class GitRepositorySearchPresenterTests: XCTestCase {
         
         _ = XCTWaiter.wait(for: [expectation(description: "Viewが読み込み状態になるまで待機")], timeout: 0.05)
         XCTAssertFalse(view.activityIndicatorAnimating)
+        XCTAssertTrue(view.showingGuidance)
     }
     
     func test_ソートオプション選択() {

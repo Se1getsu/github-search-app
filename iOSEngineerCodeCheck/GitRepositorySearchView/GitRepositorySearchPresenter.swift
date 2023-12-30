@@ -131,6 +131,9 @@ extension GitRepositorySearchPresenter: GitRepositorySearchPresenterInput {
         Task {
             await MainActor.run {
                 view.stopActivityIndicator()
+                if textDidSearch == nil {
+                    view.showGuidance()
+                }
             }
         }
     }

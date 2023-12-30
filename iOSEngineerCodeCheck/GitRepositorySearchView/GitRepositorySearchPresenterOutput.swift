@@ -35,4 +35,7 @@ protocol GitRepositorySearchPresenterOutput: AnyObject {
     
     /// サーチバーへの入力を促すガイダンス表示を隠す。
     func hideGuidance()
+    
+    /// サーチバーへの入力を促すガイダンス表示を出す。
+    func showGuidance()
 }
