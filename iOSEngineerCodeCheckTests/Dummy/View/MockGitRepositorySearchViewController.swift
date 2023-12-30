@@ -66,4 +66,8 @@ class MockGitRepositorySearchViewController: GitRepositorySearchPresenterOutput 
     func hideGuidance() {
         showingGuidance = false
     }
+    
+    func showGuidance() {
+        showingGuidance = true
+    }
 }
