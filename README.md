@@ -56,19 +56,19 @@ MVP では、プレゼンテーションロジックを ViewController ではな
 
 ターゲット直下には、画面毎のグループを配置し、View, Presenter, Controller を画面ごとに分けて管理しています。
 
-`Model` グループには、アーキテクチャによる分類上の Model にあたるものが入っています。
+[`Model`](./iOSEngineerCodeCheck/Model) グループには、アーキテクチャによる分類上の Model にあたるものが入っています。
 
-`Model/Entity` グループには、API 通信によって取得されるデータの構造体を定義しています。
+[`Model/Entity`](./iOSEngineerCodeCheck/Model/Entity) グループには、API 通信によって取得されるデータの構造体を定義しています。
 
-`Model/Error` グループには、Model のサービスが投げるエラーを定義しています。
+[`Model/Error`](./iOSEngineerCodeCheck/Model/Error) グループには、Model のサービスが投げるエラーを定義しています。
 
-`Model/APIQuery` グループには、GitHubAPI との通信に使用するクエリを定義しています。
+[`Model/APIQuery`](./iOSEngineerCodeCheck/Model/APIQuery) グループには、GitHubAPI との通信に使用するクエリを定義しています。
 
-`Model/Service` グループには、Model が提供するサービスを定義しています。状態は持ちません。
+[`Model/Service`](./iOSEngineerCodeCheck/Model/Service) グループには、Model が提供するサービスを定義しています。状態は持ちません。
 
-`View` グループには、再利用性が高く特定の画面に属することのない View が入っています。
+[`View`](./iOSEngineerCodeCheck/View) グループには、再利用性が高く特定の画面に属することのない View が入っています。
 
-`Extension` グループには、既存のクラスや構造体に対する extension を記述したファイルが入っています。
+[`Extension`](./iOSEngineerCodeCheck/Extension) グループには、既存のクラスや構造体に対する extension を記述したファイルが入っています。
 
 
 ## UI をブラッシュアップ
