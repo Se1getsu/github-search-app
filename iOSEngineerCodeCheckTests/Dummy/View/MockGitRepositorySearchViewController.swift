@@ -1,5 +1,5 @@
 //
-//  MockGitRepositoryListViewController.swift
+//  MockGitRepositorySearchViewController.swift
 //  iOSEngineerCodeCheckTests
 //  
 //  Created by Seigetsu on 2023/12/26
@@ -9,9 +9,9 @@
 import Foundation
 @testable import iOSEngineerCodeCheck
 
-class MockGitRepositoryListViewController: GitRepositoryListPresenterOutput {
+class MockGitRepositorySearchViewController: GitRepositorySearchPresenterOutput {
     // MARK: Presenter
-    private var presenter: GitRepositoryListPresenterInput!
+    private var presenter: GitRepositorySearchPresenterInput!
     
     // MARK: Called Flag
     private(set) var searchBarEndEditingCalled = false
@@ -27,7 +27,7 @@ class MockGitRepositoryListViewController: GitRepositoryListPresenterOutput {
     var showingGuidance = true
     
     // MARK: メソッド
-    func inject(presenter: GitRepositoryListPresenterInput) {
+    func inject(presenter: GitRepositorySearchPresenterInput) {
         self.presenter = presenter
     }
     

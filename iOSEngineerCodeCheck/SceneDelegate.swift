@@ -15,8 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let rootVC = GitRepositoryListViewController()
-        let presenter = GitRepositoryListPresenter(view: rootVC, gitRepositorySearcher: GitRepositorySearcher())
+        let rootVC = GitRepositorySearchViewController()
+        let presenter = GitRepositorySearchPresenter(view: rootVC, gitRepositorySearcher: GitRepositorySearcher())
         rootVC.inject(presenter: presenter)
         window?.rootViewController = UINavigationController(rootViewController: rootVC)
         window?.makeKeyAndVisible()

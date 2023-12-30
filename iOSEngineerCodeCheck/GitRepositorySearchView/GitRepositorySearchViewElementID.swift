@@ -1,5 +1,5 @@
 //
-//  GitRepositoryListViewElementID.swift
+//  GitRepositorySearchViewElementID.swift
 //  iOSEngineerCodeCheck
 //  
 //  Created by Seigetsu on 2023/12/26
@@ -9,7 +9,7 @@
 import Foundation
 
 /// UITestのために設定する accessibilityIdentifier をまとめたもの。
-enum GitRepositoryListViewElementID {
+enum GitRepositorySearchViewElementID {
     static let searchSettingBarButton = "Git Repository Search Setting Bar Button"
     static let searchBar = "Git Repository Search Bar"
     static let tableView = "Git Repository List Table"

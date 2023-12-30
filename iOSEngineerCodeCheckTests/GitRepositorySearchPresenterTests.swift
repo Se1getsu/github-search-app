@@ -1,5 +1,5 @@
 //
-//  GitRepositoryListPresenterTests.swift
+//  GitRepositorySearchPresenterTests.swift
 //  iOSEngineerCodeCheckTests
 //  
 //  Created by Seigetsu on 2023/12/26
@@ -9,18 +9,18 @@
 import XCTest
 @testable import iOSEngineerCodeCheck
 
-final class GitRepositoryListPresenterTests: XCTestCase {
+final class GitRepositorySearchPresenterTests: XCTestCase {
     // MARK: テスト対象
-    private var presenter: GitRepositoryListPresenter!
+    private var presenter: GitRepositorySearchPresenter!
     
     // MARK: ダミー
-    private var view: MockGitRepositoryListViewController!
+    private var view: MockGitRepositorySearchViewController!
     private var gitRepositorySearcher: MockGitRepositorySearcher!
     private var dummyGitRepositories = DummyGitRepositoryMaker.make(count: 3)
     
     // MARK: セットアップ
     override func setUp() {
-        view = MockGitRepositoryListViewController()
+        view = MockGitRepositorySearchViewController()
         gitRepositorySearcher = MockGitRepositorySearcher(
             result: .success(
                 GitRepositorySearchResult(
@@ -29,7 +29,7 @@ final class GitRepositoryListPresenterTests: XCTestCase {
             ),
             returningInterval: 0.1
         )
-        presenter = GitRepositoryListPresenter(
+        presenter = GitRepositorySearchPresenter(
             view: view,
             gitRepositorySearcher: gitRepositorySearcher
         )
