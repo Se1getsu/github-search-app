@@ -138,3 +138,31 @@ HIG に従い、コンテンツの読み込み中には代わりのものを表�
 想定外のエラーが発生した場合には、NSError のエラーコードをアラートとして表示し、開発側が解決に取り組む際に最低限問題を分類しやすくしました。
 
 また、リポジトリの画像のフェッチに失敗した場合には、プレースホルダーに「画像の取得に失敗しました」と表示するようにしました。
+
+## 参考にしたもの
+
+以下は、このアプリの制作にあたって、主に参考にしたものです。
+
+### API 関連
+
+- [検索 - GitHub Docs](https://docs.github.com/ja/rest/search/search?apiVersion=2022-11-28#search-repositories)
+
+- [複雑な型の設定 - JSON Schema | nju33](https://nju33.com/notes/json-schema/articles/複雑な型の設定)
+
+### UI 関連
+
+- [UIStackView | Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uistackview)
+
+- [StackViewを賢く使ってらくちんAutoLayout #Swift - Qiita](https://qiita.com/yucovin/items/ff58fcbd60ca81de77cb)
+
+- [UIScrollView | Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uiscrollview)
+
+### HIG
+
+- [Loading | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines/loading)
+
+- [Popovers | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines/popovers)
+
+### その他
+
+- [私が（iOS エンジニアの）採用でコードチェックする時何を見ているのか #Swift - Qiita](https://qiita.com/lovee/items/d76c68341ec3e7beb611)
