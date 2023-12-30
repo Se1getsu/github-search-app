@@ -1,5 +1,5 @@
 //
-//  GitRepositoryListViewController.swift
+//  GitRepositorySearchViewController.swift
 //  iOSEngineerCodeCheck
 //
 //  Created by 史 翔新 on 2020/04/20.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class GitRepositoryListViewController: UIViewController {
-    private typealias ElementID = GitRepositoryListViewElementID
+class GitRepositorySearchViewController: UIViewController {
+    private typealias ElementID = GitRepositorySearchViewElementID
     
     // MARK: UI
     private var searchSettingBarButton: UIBarButtonItem!
@@ -56,10 +56,10 @@ class GitRepositoryListViewController: UIViewController {
     }()
     
     // MARK: 依存
-    private var presenter: GitRepositoryListPresenterInput!
+    private var presenter: GitRepositorySearchPresenterInput!
     
     // MARK: メソッド
-    func inject(presenter: GitRepositoryListPresenterInput) {
+    func inject(presenter: GitRepositorySearchPresenterInput) {
         self.presenter = presenter
     }
     
@@ -141,7 +141,7 @@ class GitRepositoryListViewController: UIViewController {
     }
 }
 
-extension GitRepositoryListViewController: UITableViewDataSource {
+extension GitRepositorySearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.gitRepositories.count
     }
@@ -158,7 +158,7 @@ extension GitRepositoryListViewController: UITableViewDataSource {
     }
 }
 
-extension GitRepositoryListViewController: UITableViewDelegate {
+extension GitRepositorySearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = GitRepositoryDetailViewController(
@@ -169,7 +169,7 @@ extension GitRepositoryListViewController: UITableViewDelegate {
     }
 }
 
-extension GitRepositoryListViewController: UISearchBarDelegate {
+extension GitRepositorySearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBar(textDidChange: searchText)
     }
@@ -194,14 +194,14 @@ extension GitRepositoryListViewController: UISearchBarDelegate {
     }
 }
 
-extension GitRepositoryListViewController: UIPopoverPresentationControllerDelegate {
+extension GitRepositorySearchViewController: UIPopoverPresentationControllerDelegate {
     // iPhoneでPopoverを表示するために必要
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
 }
 
-extension GitRepositoryListViewController: SearchSettingPopoverViewDelegate {
+extension GitRepositorySearchViewController: SearchSettingPopoverViewDelegate {
     var currentSortOption: GitRepositorySortOption {
         presenter.sortOption
     }
@@ -211,7 +211,7 @@ extension GitRepositoryListViewController: SearchSettingPopoverViewDelegate {
     }
 }
 
-extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
+extension GitRepositorySearchViewController: GitRepositorySearchPresenterOutput {
     func showRetryOrCancelAlert(title: String, message: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let retry = UIAlertAction(title: "再試行", style: .default) { _ in
@@ -259,8 +259,8 @@ extension GitRepositoryListViewController: GitRepositoryListPresenterOutput {
 }
 
 #Preview("UIKit") {
-    let vc = GitRepositoryListViewController()
-    let presenter = GitRepositoryListPresenter(
+    let vc = GitRepositorySearchViewController()
+    let presenter = GitRepositorySearchPresenter(
         view: vc,
         gitRepositorySearcher: GitRepositorySearcher()
     )

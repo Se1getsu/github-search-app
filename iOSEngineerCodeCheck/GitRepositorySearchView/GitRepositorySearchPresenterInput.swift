@@ -1,5 +1,5 @@
 //
-//  GitRepositoryListPresenterInput.swift
+//  GitRepositorySearchPresenterInput.swift
 //  iOSEngineerCodeCheck
 //  
 //  Created by Seigetsu on 2023/12/24
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GitRepositoryListPresenterInput {
+protocol GitRepositorySearchPresenterInput {
     /// 画面に表示するための Git リポジトリの配列。
     var gitRepositories: [GitRepository] { get }
     

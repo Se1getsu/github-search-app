@@ -1,5 +1,5 @@
 //
-//  GitRepositoryListPresenterOutput.swift
+//  GitRepositorySearchPresenterOutput.swift
 //  iOSEngineerCodeCheck
 //  
 //  Created by Seigetsu on 2023/12/24
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GitRepositoryListPresenterOutput: AnyObject {
+protocol GitRepositorySearchPresenterOutput: AnyObject {
     /// 画面に表示している Git リポジトリの情報を更新する。
     func reloadGitRepositories()
     

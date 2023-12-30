@@ -1,5 +1,5 @@
 //
-//  GitRepositoryListPresenter.swift
+//  GitRepositorySearchPresenter.swift
 //  iOSEngineerCodeCheck
 //  
 //  Created by Seigetsu on 2023/12/24
@@ -9,9 +9,9 @@
 import Foundation
 import Combine
 
-final class GitRepositoryListPresenter {
+final class GitRepositorySearchPresenter {
     // MARK: 依存
-    private weak var view: GitRepositoryListPresenterOutput!
+    private weak var view: GitRepositorySearchPresenterOutput!
     private let gitRepositorySearcher: GitRepositorySearcherProtocol
     
     // MARK: 状態
@@ -22,7 +22,7 @@ final class GitRepositoryListPresenter {
     private var textDidSearch: String?
     
     // MARK: メソッド
-    init(view: GitRepositoryListPresenterOutput, gitRepositorySearcher: GitRepositorySearcherProtocol) {
+    init(view: GitRepositorySearchPresenterOutput, gitRepositorySearcher: GitRepositorySearcherProtocol) {
         self.view = view
         self.gitRepositorySearcher = gitRepositorySearcher
     }
@@ -90,7 +90,7 @@ final class GitRepositoryListPresenter {
     }
 }
 
-extension GitRepositoryListPresenter: GitRepositoryListPresenterInput {
+extension GitRepositorySearchPresenter: GitRepositorySearchPresenterInput {
     func didSelectSortOption(_ sortOption: GitRepositorySortOption) {
         self.sortOption = sortOption
         searchingTask?.cancel()
