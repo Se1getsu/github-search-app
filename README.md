@@ -1,54 +1,106 @@
 # 株式会社ゆめみ iOS エンジニアコードチェック課題
 
-## 概要
+## 環境
 
-本プロジェクトは株式会社ゆめみ（以下弊社）が、弊社に iOS エンジニアを希望する方に出す課題のベースプロジェクトです。本課題が与えられた方は、下記の説明を詳しく読んだ上で課題を取り組んでください。
-
-新卒／未経験者エンジニアの場合、本リファクタリングの通常課題の代わりに、[新規アプリ作成の特別課題](https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud)も選択できますので、ご自身が得意と感じる方を選んでください。特別課題を選んだ場合、通常課題の取り組みは不要です。新規アプリ作成の課題の説明を詳しく読んだ上で課題を取り組んでください。
+- IDE：Xcode 15.1（最新の安定版）
+- Swift：Swift 5.9.2（最新の安定版）
+- 開発ターゲット：iOS 17.2（最新の安定版）
+- 使用ライブラリ：SwiftLint, Alamofire
+- ライブラリ管理：Swift Package Manager
 
 ## アプリ仕様
 
-本アプリは GitHub のリポジトリーを検索するアプリです。
+本アプリは GitHub のリポジトリを検索するアプリです。
+
+画面上部の検索バーにキーワードを入力すると、結果の一覧（リポジトリ名）が表示され、それをタップすると、リポジトリのより詳細な情報を確認することができます。
 
 ![動作イメージ](README_Images/app.gif)
 
-### 環境
+### 新機能１：リポジトリの並び替え
 
-- IDE：基本最新の安定版（本概要更新時点では Xcode 14.1）
-- Swift：基本最新の安定版（本概要更新時点では Swift 5.7）
-- 開発ターゲット：基本最新の安定版（本概要更新時点では iOS 16.1）
-- サードパーティーライブラリーの利用：オープンソースのものに限り制限しない
+検索画面の右上の設定ボタンから、検索結果のリポジトリの並び順を指定できるようにしました。
 
-### 動作
+![動作イメージ](README_Images/feature_sort.gif)
 
-1. 何かしらのキーワードを入力
-2. GitHub API（`search/repositories`）でリポジトリーを検索し、結果一覧を概要（リポジトリ名）で表示
-3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）を表示
+### 新機能２：リポジトリをブラウザで開く
 
-## 課題取り組み方法
+リポジトリの詳細画面の右上のボタンから、そのリポジトリの GitHub のページをブラウザで開けるようにしました。
 
-Issues を確認した上、本プロジェクトを [**Duplicate** してください](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/duplicating-a-repository)（Fork しないようにしてください。必要ならプライベートリポジトリーにしても大丈夫です）。今後のコミットは全てご自身のリポジトリーで行ってください。
+![動作イメージ](README_Images/feature_browse.gif)
 
-コードチェックの課題 Issue は全て [`課題`](https://github.com/yumemi/ios-engineer-codecheck/milestone/1) Milestone がついており、難易度に応じて Label が [`初級`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3A初級+milestone%3A課題)、[`中級`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3A中級+milestone%3A課題+) と [`ボーナス`](https://github.com/yumemi/ios-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3Aボーナス+milestone%3A課題+) に分けられています。課題の必須／選択は下記の表とします：
+### アプリアイコンの作成
+iPadアプリ『アイビスペイントＸ』を用いて、アプリアイコンを作成しました。
 
-|   | 初級 | 中級 | ボーナス
-|--:|:--:|:--:|:--:|
-| 新卒／未経験者 | 必須 | 選択 | 選択 |
-| 中途／経験者 | 必須 | 必須 | 選択 |
+GitHub のアイコンをオマージュした黒丸から、検索を意味する虫眼鏡のシルエットを切り抜き、アプリのテーマカラーとして採用した紫色の背景に添えました。
+
+![アイコンイメージ](README_Images/app_icon.png)
+
+## 設計
+
+### アーキテクチャ
+
+本アプリでは、画面(ViewController)の複雑さに応じて 2 種類の異なるアーキテクチャを使い分けています。
+本アプリで実装している画面は、以下の 3 つです。
+
+1. GitRepositorySearchView ... 検索画面
+2. SearchSettingPopoverView ... 設定ボタンのポップオーバーの画面
+3. GitRepositoryDetailView ... リポジトリの詳細画面
+
+1 の画面には MVP アーキテクチャ、2, 3 の画面には MVC アーキテクチャを採用しました。
+
+MVP では、プレゼンテーションロジックをViewControllerではなくPresenterに委譲する形で実装を行うため、画面を通じてのユーザーとのやり取りについての関心と、View-Model間のデータのやり取りについての関心を分離することができ、プレゼンテーションロジックのテストが容易になります。
+
+しかしコード量の増加という欠点も存在することから、簡単な画面では MVC を採用することにしました。
+
+### プロジェクトツリー
+
+ターゲット直下には、画面毎のグループを配置し、View, Presenter, Controllerを画面ごとに分けて管理しています。
+
+`Model` グループには、アーキテクチャによる分類上のModelにあたるものが入っています。
+
+`Model/Entity` グループには、API通信によって取得されるデータの構造体を定義しています。
+
+`Model/Error` グループには、`Model`のサービスが投げるエラーを定義しています。
+
+`Model/APIQuery` グループには、GitHubAPIとの通信に使用するクエリを定義しています。
+
+`Model/Service` グループには、`Model`が提供するサービスを定義しています。状態は持ちません。
+
+`View` グループには、再利用性が高く特定の画面に属することのないViewが入っています。
+
+`Extension` グループには、既存のクラスや構造体に対するextensionを記述したファイルが入っています。
 
 
-課題 Issueをご自身のリポジトリーにコピーするGitHub Actionsをご用意しております。  
-[こちらのWorkflow](./.github/workflows/copy-issues.yml)を[手動でトリガーする](https://docs.github.com/ja/actions/managing-workflow-runs/manually-running-a-workflow)ことでコピーできますのでご活用下さい。
+## UIをブラッシュアップ
 
-課題が完成したら、リポジトリーのアドレスを教えてください。
+### 彩色
 
-## 参考情報
+個人的に好きな紫色をテーマにして、UIに色をつけました。
 
-提出された課題の評価ポイントについても詳しく書かれてありますので、ぜひご覧ください。
+UIに使用する色は、[AppColor.swift](./iOSEngineerCodeCheck/AppColor.swift) という 1 つのファイルの中に、`AppColor.background` や `AppColor.searchBarBarTint` といった文脈化された名前で定義しました。
 
-- [私が（iOS エンジニアの）採用でコードチェックする時何を見ているのか](https://qiita.com/lovee/items/d76c68341ec3e7beb611)
-- [CocoaPods の利用手引き](https://qiita.com/ykws/items/b951a2e24ca85013e722)
-- [ChatGPT (Model: GPT-4) でコードリファクタリングをやってみる](https://qiita.com/mitsuharu_e/items/213491c668ab75924cfd)
+できる限りシステムで用意されたダイナミックカラーを使用するために、Asset Catalogによる管理はしていません。
 
-ChatGPTなどAIサービスの利用は禁止しておりません。  
-利用にあたって工夫したプロンプトやソースコメント等をご提出頂くと加点評価する場合がございます。 (減点評価はありません)
+システムの設定に応じて、ダークモードやハイコントラストにも対応しています。
+
+![画面イメージ](README_Images/dynamic_color.png)
+
+### レイアウト強化
+
+様々な縦横比の画面でも、最適なレイアウトでUIが表示されるようにしました。
+
+以下に、いくつかの例を示します。
+
+iPhone 15 Pro 横画面：
+
+![画面イメージ](README_Images/layout_iPhone.jpeg)
+
+iPad Air (第５世代) 横画面 Split View：
+
+![画面イメージ](README_Images/layout_iPad_1.jpeg)
+
+iPad Air (第５世代) 縦画面 Slide Over：
+
+![画面イメージ](README_Images/layout_iPad_2.jpeg)
+
+こうように、リポジトリ名が画面幅の関係で表示しきれない場合は、スクロールして見ることができます。
